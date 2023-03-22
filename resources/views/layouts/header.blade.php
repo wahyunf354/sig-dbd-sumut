@@ -9,11 +9,11 @@
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto {{ Request::is('/') ? 'active' : '' }}" href="{{route('beranda')}}">Beranda</a></li>
-        <li><a class="nav-link scrollto" href="#berita">Berita</a></li>
+{{--        <li><a class="nav-link scrollto" href="#berita">Berita</a></li>--}}
         <li><a class="nav-link scrollto {{ Request::is('/peta_sebaran') ? 'active' : '' }}" href="{{route('peta_sebaran')}}">Sebaran</a></li>
         <li><a class="nav-link scrollto" href="#contact_rs">Edukasi</a></li>
-        <li><a class="nav-link scrollto" href="#about_as">Tanya Jawab</a></li>
-        <li><a class="nav-link scrollto" href="#pengaduan">Pengaduan</a></li>
+        <li><a class="nav-link scrollto" href="#faq">Tanya Jawab</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Pengaduan</a></li>
         <li><a class="nav-link scrollto" href="#contact_rs">Kontak Rumah Sakit</a></li>
         <li><a class="nav-link scrollto" href="#about_as">Tetang Kami</a></li>
 {{--        <li><a class="nav-link scrollto" href="#team">Team</a></li>--}}

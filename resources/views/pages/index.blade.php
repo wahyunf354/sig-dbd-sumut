@@ -85,15 +85,13 @@
 
           <div class="content">
             <h3>Eum ipsam laborum deleniti <strong>velit pariatur architecto aut nihil</strong></h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-            </p>
+
           </div>
 
           <div class="accordion-list">
             <ul>
               <li>
-                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> Incidence Rate DBD? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                   <p>
                     Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
@@ -102,7 +100,7 @@
               </li>
 
               <li>
-                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> Case Fatality Rate (CFR) DBD? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                   <p>
                     Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
@@ -111,7 +109,7 @@
               </li>
 
               <li>
-                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> Angka bebas jentik? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                 <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                   <p>
                     Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
@@ -131,7 +129,7 @@
   </section><!-- End Why Us Section -->
 
   <!-- ======= Skills Section ======= -->
-  <section id="skills" class="skills">
+  <section id="skills" class="skills d-none">
     <div class="container" data-aos="fade-up">
 
       <div class="row">
@@ -184,7 +182,7 @@
   </section><!-- End Skills Section -->
 
   <!-- ======= Services Section ======= -->
-  <section id="services" class="services section-bg">
+  <section id="services" class="services section-bg d-none">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
@@ -231,7 +229,7 @@
   </section><!-- End Services Section -->
 
   <!-- ======= Cta Section ======= -->
-  <section id="cta" class="cta">
+  <section id="cta" class="cta d-none">
     <div class="container" data-aos="zoom-in">
 
       <div class="row">
@@ -248,7 +246,7 @@
   </section><!-- End Cta Section -->
 
   <!-- ======= Portfolio Section ======= -->
-  <section id="portfolio" class="portfolio">
+  <section id="portfolio" class="portfolio d-none">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
@@ -361,7 +359,7 @@
   </section><!-- End Portfolio Section -->
 
   <!-- ======= Team Section ======= -->
-  <section id="team" class="team section-bg">
+  <section id="team" class="team section-bg d-none">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
@@ -445,7 +443,7 @@
   </section><!-- End Team Section -->
 
   <!-- ======= Pricing Section ======= -->
-  <section id="pricing" class="pricing">
+  <section id="pricing" class="pricing d-none">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">

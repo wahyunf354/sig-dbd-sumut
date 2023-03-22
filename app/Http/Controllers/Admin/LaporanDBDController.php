@@ -16,7 +16,7 @@ class LaporanDBDController extends Controller
 
     public function uploadFileLaporan($file)
 	{
-        $extention = $file->getClientOriginalExtension();
+    $extention = $file->getClientOriginalExtension();
 		$filename = SupportCarbon::now()->timestamp.'.'.$extention;
 		$file->move(public_path('files/laporanDBD/'), $filename);
 
@@ -24,24 +24,21 @@ class LaporanDBDController extends Controller
 	}
 
     public function uploadLaporan(Request $request) {
-        $validator = Validator::make($request->all(), [
-			'laporan_dbd' => 'required',
-		], [
-            'excel_file.mimes' => 'File Excel yang diunggah harus berformat xls atau xlsx.',
-        ]);
+      $validator = Validator::make($request->all(), [
+        'laporan_dbd' => 'required',
+      ], [
+        'excel_file.mimes' => 'File Excel yang diunggah harus berformat xls atau xlsx.',
+      ]);
 
-		if ($validator->fails()) {
-			Alert::error('Invalid Input', 'there is a problem with some input');
-			return redirect()->back()->withErrors($validator)->withInput($request->all());
-		}
+      if ($validator->fails()) {
+        Alert::error('Invalid Input', 'there is a problem with some input');
+        return redirect()->back()->withErrors($validator)->withInput($request->all());
+      }
 
-        // Upload excel laporan DBD
-        $filenameExcel = "";
-		if (!empty($request->file('laporan_dbd'))) {
-			$filenameExcel = $this->uploadFileLaporan($request->file('laporan_dbd'));
-		}
-
-        
-
+          // Upload excel laporan DBD
+          $filenameExcel = "";
+      if (!empty($request->file('laporan_dbd'))) {
+        $filenameExcel = $this->uploadFileLaporan($request->file('laporan_dbd'));
+      }
     }
 }

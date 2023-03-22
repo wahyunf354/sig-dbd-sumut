@@ -8,15 +8,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-        <h1>Better Solutions For Your Business</h1>
-        <h2>We are team of talented designers making websites with Bootstrap</h2>
+        <h1>DBD Sumatera Utara</h1>
+        <h2>Website ini sebagai media informasi kepada masyarakat tentang penyakit DBD dan kondisi Penyebaran Penyakit DBD di Sumatera Utara</h2>
         <div class="d-flex justify-content-center justify-content-lg-start">
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
-          <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          <a href="{{route("peta_sebaran")}}" class="btn-get-started scrollto">Peta Sebaran</a>
         </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-        <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+        <img src="assets/img/nyamuk.webp" class="img-fluid animated" alt="Nyamuk DBD">
       </div>
     </div>
   </div>
@@ -25,68 +24,51 @@
 
 <main id="main">
 
-  <!-- ======= Clients Section ======= -->
-  <section id="clients" class="clients section-bg">
-    <div class="container">
+{{--  <!-- ======= Clients Section ======= -->--}}
+{{--  <section id="clients" class=" clients section-bg">--}}
+{{--    <div class="container">--}}
 
-      <div class="row" data-aos="zoom-in">
+{{--      <div class="row justify-content-center" data-aos="zoom-in">--}}
 
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
-        </div>
+{{--        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--          <img src="assets/img/logo/logodinkes1.png" class="" alt="" >--}}
+{{--        </div>--}}
 
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-2.png" class="img-fluid" alt="">
-        </div>
+{{--      <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">--}}
+{{--          <img src="assets/img/logo/logounimed.png" class="img-fluid" alt="">--}}
+{{--      </div>--}}
 
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-3.png" class="img-fluid" alt="">
-        </div>
 
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-4.png" class="img-fluid" alt="">
-        </div>
+{{--      </div>--}}
 
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-5.png" class="img-fluid" alt="">
-        </div>
-
-        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-          <img src="assets/img/clients/client-6.png" class="img-fluid" alt="">
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Cliens Section -->
+{{--    </div>--}}
+{{--  </section><!-- End Cliens Section -->--}}
 
   <!-- ======= About Us Section ======= -->
   <section id="about" class="about">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>About Us</h2>
+        <h2>About DBD</h2>
       </div>
 
       <div class="row content">
         <div class="col-lg-6">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+              Penyakit Demam Berdarah Dengue (DBD) adalah kondisi yang disebabkan oleh virus dan memiliki beberapa gejala klinis yang dapat dikenali, termasuk demam tinggi yang tiba-tiba dan terus-menerus selama 2-7 hari, serta tanda-tanda perdarahan seperti munculnya bintik-bintik merah di kulit (petekie dan purpura), perdarahan di mata (perdarahan konjungtiva), hidung (episkasis), dan juga munculnya memar dan darah dalam tinja atau urine. Selain itu, uji Tourniqet yang positif juga dapat menjadi indikator dari adanya DBD. Informasi ini penting untuk diketahui agar masyarakat dapat mengenali gejala DBD dengan lebih baik dan dapat mengambil langkah-langkah pencegahan yang tepat.
           </p>
-          <ul>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-            <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
-            <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>
-          </ul>
+
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0">
           <p>
-            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Berikut adalah indikator yang digunakan pada kasus DBD
           </p>
-          <a href="#" class="btn-learn-more">Learn More</a>
+            <ul>
+                <li><i class="ri-check-double-line"></i> Incidence Rate DBD</li>
+                <li><i class="ri-check-double-line"></i> Case Fatality Rate (CFR) DBD</li>
+                <li><i class="ri-check-double-line"></i> Angka bebas jentik</li>
+            </ul>
+          <a href="https://id.wikipedia.org/wiki/Demam_berdarah_dengue" target="_blank" class="btn-learn-more">Learn More</a>
         </div>
       </div>
 

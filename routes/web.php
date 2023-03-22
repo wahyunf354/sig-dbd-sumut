@@ -24,7 +24,6 @@ Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran'])->name('peta
 
 
 Route::group(['prefix' => 'admin'], function () {
-
   Route::get('login', [AuthController::class, 'showLogin'])->name("admin.login");
   Route::post('login', [AuthController::class, 'doLogin'])->name("admin.post.login");
   Route::get('register', [AuthController::class, 'showRegister'])->name("admin.register");

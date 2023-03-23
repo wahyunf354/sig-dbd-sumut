@@ -10,20 +10,22 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanDBDController extends Controller
 {
-    public function showUploadLaporan() {
+    public function showUploadLaporan()
+    {
         return view('admin.pages.laporanDBD.create');
     }
 
     public function uploadFileLaporan($file)
-	{
-    $extention = $file->getClientOriginalExtension();
-		$filename = SupportCarbon::now()->timestamp.'.'.$extention;
-		$file->move(public_path('files/laporanDBD/'), $filename);
+    {
+      $extention = $file->getClientOriginalExtension();
+      $filename = SupportCarbon::now()->timestamp.'.'.$extention;
+      $file->move(public_path('files/laporanDBD/'), $filename);
 
-		return $filename;
-	}
+      return $filename;
+    }
 
-    public function uploadLaporan(Request $request) {
+    public function uploadLaporan(Request $request)
+    {
       $validator = Validator::make($request->all(), [
         'laporan_dbd' => 'required',
       ], [

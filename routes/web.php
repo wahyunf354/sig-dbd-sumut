@@ -33,7 +33,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::middleware(Authenticate::class)->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
 
-    Route::resource('user', UserController::class);
+    Route::resource('user', AuthController::class);
 
     // Laporan DBD
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');

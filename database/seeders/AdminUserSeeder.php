@@ -22,5 +22,12 @@ class AdminUserSeeder extends Seeder
         'password' => bcrypt('123456789'),
         'role' => 1,
       ]);
+      User::create([
+        'name' => 'Test',
+        'username' => 'test',
+        'email' => 'test@test.com',
+        'password' => bcrypt('123456789'),
+        'role' => 1,
+      ]);
     }
 }

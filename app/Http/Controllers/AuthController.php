@@ -3,69 +3,83 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Console\View\Components\Alert;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function showLogin()
-    {
-        return view('admin.pages.auth.login');
-    }
 
-    public function showRegister()
-    {
-        return view('admin.pages.auth.register');
-    }
+  private UserService $userService;
 
-    public function doRegister(Request $request)
-    {
-        // do validated
-        Validator::make($request->all(), [
-            'name' => ['required'],
-            'username' => ['required', 'unique:users'],
-            'email' => ['required', 'unique:users', 'email:rfc,dns'],
-            'password' => ['required', 'min:6'],
-            'confim-password' => ['required', 'same:password'],
-        ])->validate();
+  /**
+   * @param UserService $userService
+   */
+  public function __construct(UserService $userService)
+  {
+    $this->userService = $userService;
+  }
 
-        // Save data to database
-        $newUser = new User;
+  public function showLogin()
+  {
+    return view('admin.pages.auth.login');
+  }
 
-        $newUser->name = $request->name;
-        $newUser->username = $request->username;
-        $newUser->email = $request->email;
-        $newUser->password = Hash::make($request->password);
-        $newUser->role = 1;
+  public function showRegister()
+  {
+      return view('admin.pages.auth.register');
+  }
 
-        $newUser->save();
+  public function doRegister(Request $request) : RedirectResponse|Response
+  {
+      // do validated
+      Validator::make($request->all(), [
+          'name' => ['required'],
+          'username' => ['required', 'unique:users'],
+          'email' => ['required', 'unique:users', 'email:rfc,dns'],
+          'password' => ['required', 'min:6'],
+          'confim-password' => ['required', 'same:password'],
+      ])->validate();
 
+      // Save data to database
+      $result = $this->userService->register($request);
+      if($result) {
         return redirect()->route('admin.login');
-    }
+      } else {
+        return redirect()->route('admin.register');
+      }
+  }
 
-    public function doLogin(Request $request)
-    {
-        // Melakukan validasi
-        Validator::make($request->all(), [
-            'email' => ['required', 'email:rfc,dns'],
-            'password' => ['required'],
-        ])->validate();
-        // Melakukan login
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard')->withSuccess('Logged-in');
-        }
-        return redirect()->route('admin.login')->withSuccess('Credentials are wrong.');
-    }
+  public function doLogin(Request $request): Response|RedirectResponse
+  {
+    // Melakukan validasi
+    Validator::make($request->all(), [
+        'email' => ['required', 'email:rfc,dns'],
+        'password' => ['required'],
+    ])->validate();
 
-    public function logout()
-    {
-        FacadesSession::flush();
-        Auth::logout();
-        return redirect()->route('admin.login');
+    // Melakukan login
+    if($this->userService->login($request->email, $request->password)) {
+      return redirect()->route('admin.dashboard')->withSuccess("Berhasil login");
     }
+    return redirect()->route('admin.login')->withSuccess('Credentials are wrong.');
+  }
+
+  public function logout() : Response|RedirectResponse
+  {
+    $isLogout = $this->userService->logout();
+
+    if($isLogout) {
+      return redirect()->route('admin.login');
+    } else {
+      return redirect()->route('admin.dashboard');
+    }
+  }
 }

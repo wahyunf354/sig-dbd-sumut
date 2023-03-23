@@ -8,10 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LaporanDBD extends Model
 {
-    use HasFactory, SoftDeletes;
+  use HasFactory, SoftDeletes;
 
-    public function kabupatenOrKotaSumut()
-    {
-      return $this->belongsTo(KabupatenOrKotaSumut::class);
-    }
+  protected $table = 'laporan_dbd_files';
+
+  protected $fillable = [
+    'bulan',
+    'tahun',
+    'laporan_file',
+    'kabkota_id',
+  ];
+
+  protected $primaryKey = 'id';
+
+  public function kabupatenOrKotaSumut()
+  {
+    return $this->belongsTo(KabupatenOrKotaSumut::class);
+  }
 }

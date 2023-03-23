@@ -8,19 +8,24 @@
 -->
 <!-- Breadcrumb-->
 <html lang="en">
+
 @include('admin.layouts.head')
+
+
 <body>
-  @include('admin.layouts.sidebar')
-  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
-    @include('admin.layouts.header')
 
-    <div class="body flex-grow-1 px-3">
-      @yield('content')
-    </div>
+@include('admin.layouts.sidebar')
+<div class="wrapper d-flex flex-column min-vh-100 bg-light">
+  @include('admin.layouts.header')
 
-    @include('admin.layouts.footer')
+  <div class="body flex-grow-1 px-3">
+    @yield('content')
   </div>
-  @include('admin.layouts.js')
-  @yield('script')
+
+  @include('admin.layouts.footer')
+</div>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+@include('admin.layouts.js')
+@yield('script')
 </body>
 </html>

@@ -8,10 +8,12 @@ use PhpParser\Node\Stmt\Label;
 
 class KabupatenOrKotaSumut extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function laporanDBD()
-    {
-      return $this->hasMany(LaporanDBD::class);
-    }
+  protected $table = 'kabupaten_or_kota_sumut';
+
+  public function laporanDBD()
+  {
+    return $this->hasMany(LaporanDBD::class);
+  }
 }

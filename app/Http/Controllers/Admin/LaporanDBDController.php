@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ExcelController;
+use App\Imports\LaporanDbdImport;
 use App\Models\KabupatenOrKotaSumut;
 use App\Models\LaporanDBD;
+use App\Models\LaporanDbdFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpParser\Node\Stmt\Label;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanDBDController extends Controller
@@ -64,7 +68,7 @@ class LaporanDBDController extends Controller
       return redirect()->back();
     }
 
-    $newReport = new LaporanDBD();
+    $newReport = new LaporanDbdFiles();
 
     $newReport->tahun = $request->tahun;
     $newReport->bulan = $request->bulan;
@@ -72,6 +76,10 @@ class LaporanDBDController extends Controller
     $newReport->laporan_file = $filenameExcel;
 
     $result = $newReport->save();
+
+    $path = public_path('files/laporanDBD/' . $filenameExcel);
+
+    Excel::import(new LaporanDbdImport($newReport->id), $path);
 
     if ($result) {
       Alert::success("Berhasil", "Berhasil melakukan upload laporan DBD");
@@ -82,15 +90,4 @@ class LaporanDBDController extends Controller
     }
   }
 
-  public function readExcelData()
-  {
-    $path = public_path('files/laporanDBD/1679556610.xls'); // path file Excel yang akan di ekstrak datanya
-
-    $data = Excel::load($path, function ($reader) {
-    })->get(); // membaca data Excel dan mengembalikan dalam bentuk Collection
-
-    dd($data);
-
-    return view('excel-data', compact('data')); // melempar data hasil ekstraksi ke view
-  }
 }

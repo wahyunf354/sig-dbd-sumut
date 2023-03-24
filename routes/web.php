@@ -39,6 +39,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');
 
-    Route::get('excelRead', [LaporanDBDController::class, 'readExcelData'])->name("data");
+    Route::get('excelRead', [ExcelController::class, 'readExcelData'])->name("data");
   });
 });

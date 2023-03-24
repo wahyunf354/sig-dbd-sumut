@@ -60,8 +60,8 @@ return new class extends Migration {
       $table->integer('jumlah_kasus_penderita')->default(0);
       $table->integer('jumlah_kasus_meninggal')->default(0);
 
-      $table->float('ir_dbd');
-      $table->float('crf_dbd');
+      $table->float('ir_dbd')->default(0);
+      $table->float('crf_dbd')->default(0);
       $table->integer('jumlah_desakel_penyelidikan_epidemologi')->default(0);
       $table->integer('jumlah_desakel_psn_dbd_3mp_masal')->default(0);
       $table->integer('jumlah_rumah_bangunan_larvasidasi')->default(0);
@@ -77,7 +77,7 @@ return new class extends Migration {
       $table->integer('jumlah_rumah_bangunan_pjb')->default(0);
       $table->integer('jumlah_rumah_bangunan_temu_jentik')->default(0);
 
-      $table->float('abj');
+      $table->float('abj')->default(0);
 
       $table->foreign('laporan_dbd_file_id')->references('id')->on('laporan_dbd_files');
       $table->timestamps();

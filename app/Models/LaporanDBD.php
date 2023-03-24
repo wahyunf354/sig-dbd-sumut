@@ -10,19 +10,20 @@ class LaporanDBD extends Model
 {
   use HasFactory, SoftDeletes;
 
-  protected $table = 'laporan_dbd_files';
-
   protected $fillable = [
-    'bulan',
-    'tahun',
-    'laporan_file',
-    'kabkota_id',
+    'laporan_dbd_file_id',
+    'kecamatan_dijumpai_dbd',
+    'puskesmas_dijumpai_dbd',
+    'desa_kelurahan_dijumpai_dbd',
+    'jumlah_penduduk_desa_kelurahan'
   ];
+
+  protected $table = 'laporan_dbd';
 
   protected $primaryKey = 'id';
 
-  public function kabupatenOrKotaSumut()
+  public function laporanDbdFile()
   {
-    return $this->belongsTo(KabupatenOrKotaSumut::class);
+    return $this->belongsTo(LaporanDBD::class);
   }
 }

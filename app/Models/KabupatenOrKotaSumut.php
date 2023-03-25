@@ -10,6 +10,9 @@ class KabupatenOrKotaSumut extends Model
 {
   use HasFactory;
 
+  protected $fillable = ['nama'];
+  protected $primaryKey = "id";
+
   protected $table = 'kabupaten_or_kota_sumut';
 
   public function laporanDbdFile()

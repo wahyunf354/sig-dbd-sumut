@@ -50,6 +50,7 @@
                 <label for="laporan_dbd">File Laporan <span class="text-danger">*</span> </label>
                 <input class="form-control form-control-sm" type="file" id="laporan_dbd" name="laporan_dbd"
                        value="{{old("laporan_dbd")}}">
+                <small>Form laporan harus sesuai</small>
               </div>
               <button class="btn btn-primary mb-3" type="submit">Unggah</button>
               @if($errors->any())

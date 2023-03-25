@@ -10,6 +10,7 @@ use App\Models\LaporanDBD;
 use App\Models\LaporanDbdFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon as SupportCarbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
@@ -18,6 +19,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanDBDController extends Controller
 {
+
+  public function index()
+  {
+    $laporaDbds = LaporanDbdFiles::all();
+//    dd($laporaDbds);
+
+    return view('admin.pages.laporanDBD.index', compact('laporaDbds'));
+  }
+
 
   public function showUploadLaporan()
   {
@@ -71,6 +81,7 @@ class LaporanDBDController extends Controller
     $newReport = new LaporanDbdFiles();
 
     $newReport->tahun = $request->tahun;
+    $newReport->user_id_upload = Auth::id();
     $newReport->bulan = $request->bulan;
     $newReport->kabkota_id = $request->kabkota_id;
     $newReport->laporan_file = $filenameExcel;

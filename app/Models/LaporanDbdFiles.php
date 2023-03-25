@@ -23,11 +23,16 @@ class LaporanDbdFiles extends Model
 
   public function kabupatenOrKotaSumut()
   {
-    return $this->belongsTo(KabupatenOrKotaSumut::class);
+    return $this->belongsTo(KabupatenOrKotaSumut::class, 'kabkota_id');
   }
 
   public function laporanDbd()
   {
     return $this->hasMany(LaporanDBD::class);
+  }
+
+  public function user()
+  {
+    return $this->belongsTo(User::class, 'user_id_upload');
   }
 }

@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-<!--
-* CoreUI - Free Bootstrap Admin Template
-* @version v4.2.2
-* @link https://coreui.io
-* Copyright (c) 2022 creativeLabs Łukasz Holeczek
-* Licensed under MIT (https://coreui.io/license)
--->
-<!-- Breadcrumb-->
-<html lang="en">
 @include('admin.layouts.head')
-<body>
-  @include('admin.layouts.sidebar')
-  <div class="wrapper d-flex flex-column min-vh-100 bg-light">
-    @include('admin.layouts.header')
 
-    <div class="body flex-grow-1 px-3">
-      @yield('content')
-    </div>
 
-    @include('admin.layouts.footer')
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="Sumut" height="60" width="60">
   </div>
-  @include('admin.layouts.js')
-  @yield('script')
+  @include('admin.layouts.header')
+  @include('admin.layouts.sidebar')
+
+  <div class="content-wrapper">
+    @yield('content')
+  </div>
+
+  @include('admin.layouts.footer')
+</div>
+<!-- ./wrapper -->
+
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+@include('admin.layouts.js')
+@yield('script')
 </body>
 </html>

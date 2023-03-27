@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LaporanDBDController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authenticate;
@@ -32,10 +31,10 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::middleware(Authenticate::class)->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
-
-    Route::resource('user', UserController::class);
+    Route::resource('user', AuthController::class);
 
     // Laporan DBD
+    Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');
   });

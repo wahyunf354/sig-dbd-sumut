@@ -12,17 +12,17 @@
             </div>
           </div>
           <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-            <table class="table">
+            <table class="table" id="table_laporan_dbd_file">
               <thead>
               <tr>
-                <th scope="col">No</th>
-                <th scope="col">Kabupaten</th>
-                <th scope="col">Bulan</th>
-                <th scope="col">Tahun</th>
-                <th scope="col">File</th>
-                <th scope="col">Author</th>
-                <th scope="col">Tanggal Upload</th>
-                <th scope="col">Action</th>
+                <th>No</th>
+                <th>Kabupaten</th>
+                <th>Bulan</th>
+                <th>Tahun</th>
+                <th>File</th>
+                <th>Author</th>
+                <th>Tanggal Upload</th>
+                <th>Action</th>
               </tr>
               </thead>
               <tbody>
@@ -51,7 +51,8 @@
                       </a>
                     </td>
                     <td>{{$row->user->name}}</td>
-                    <td>{{$row->created_at}}</td>
+                    <td>{{ \Carbon\Carbon::parse($row->created_at)->timezone('Asia/Jakarta')->format('d F Y, H:i')." WIB" }}
+                    </td>
                     <td>
                       <button class="btn btn-danger btn-sm text-white">Hapus</button>
                       <button class="btn btn-info btn-sm text-white">Detail</button>
@@ -66,4 +67,17 @@
       </div>
     </div>
   </div>
+@endsection
+@section("script")
+  <script>
+    $(document).ready(function () {
+      $('#table_laporan_dbd_file').DataTable({
+        "lengthChange": false,
+        "language": {
+          "search": "",
+          "searchPlaceholder": "Search..."
+        }
+      });
+    });
+  </script>
 @endsection

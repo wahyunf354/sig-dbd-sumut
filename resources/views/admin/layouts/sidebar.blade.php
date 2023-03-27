@@ -1,100 +1,134 @@
-<div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-  <div class="sidebar-brand d-none d-md-flex">
-    <img class="sidebar-brand-full" src="{{asset('admin')}}/assets/brand/logo_long.png" height="46" alt="Dinkes Logo">
-    <img class="sidebar-brand-narrow" src="{{asset('admin')}}/assets/brand/logo_long.png" height="46" alt="Dinkes Logo">
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-navy elevation-4">
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <img src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="AdminLTE Logo"
+         class="brand-image">
+    <span class="brand-text font-weight-light">SIG DBD SUMUT</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2"
+             alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item">
+          <a href="{{route('admin.laporandbd.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admin.uploadLaporanDBD')}}" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+            <p>
+              Laporan DBD
+            </p>
+            <span class="right badge badge-danger">New</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{route('admin.post.uploadLaporanDBD')}}" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Upload Laporan DBD
+            </p>
+          </a>
+        </li>
+        <li class="nav-header text-uppercase">Ringkasan Deman Dengue</li>
+        <li class="nav-item">
+          <a href="pages/calendar.html" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Semua
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/calendar.html" class="nav-link">
+            <i class="nav-icon far fa-calendar-alt"></i>
+            <p>
+              Incident Rate
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/gallery.html" class="nav-link">
+            <i class="nav-icon far fa-image"></i>
+            <p>
+              CFR
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="pages/kanban.html" class="nav-link">
+            <i class="nav-icon fas fa-columns"></i>
+            <p>
+              Angka Bebas Jentik
+            </p>
+          </a>
+        </li>
+        <li class="nav-header text-uppercase">Administrasi</li>
+        <li class="nav-item">
+          <a href="iframe.html" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>Akun</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>Kabupaten atau Kota</p>
+          </a>
+        </li>
+        <li class="nav-header text-uppercase">PELAYANAN MASYARAKAT</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-circle nav-icon"></i>
+            <p>Kotak Rumah Sakit</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fas fa-circle nav-icon"></i>
+            <p>Pengaduan</p>
+          </a>
+        </li>
+        <li class="nav-header">LABELS</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-circle text-danger"></i>
+            <p class="text">Important</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-circle text-warning"></i>
+            <p>Warning</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon far fa-circle text-info"></i>
+            <p>Informational</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
   </div>
-  <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
-    <li class="nav-item"><a class="nav-link" href="{{route("admin.dashboard")}}">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
-        </svg>
-        Dashboard</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{route('admin.laporandbd.index')}}">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-        </svg>
-        Laporan DBD</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{route('admin.uploadLaporanDBD')}}">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-input"></use>
-        </svg>
-        Input Laporan DBD</a></li>
-    <li class="nav-title">DBD</li>
-    <li class="nav-item"><a class="nav-link" href="colors.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
-        </svg>
-        Incident Rate<span class="badge badge-sm bg-info ms-auto">NEW</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="typography.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user-x"></use>
-        </svg>
-        Angka Kematian</a></li>
-    <li class="nav-item"><a class="nav-link" href="typography.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bug"></use>
-        </svg>
-        Angka Bebas Jentik</a></li>
-    <li class="nav-title">Administrasi</li>
-    <li class="nav-group d-none"><a class="nav-link nav-group-toggle" href="#">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cursor"></use>
-        </svg>
-        Buttons</a>
-      <ul class="nav-group-items">
-        <li class="nav-item"><a class="nav-link" href="buttons/buttons.html"><span class="nav-icon"></span> Buttons</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="buttons/button-group.html"><span class="nav-icon"></span> Buttons
-            Group</a></li>
-        <li class="nav-item"><a class="nav-link" href="buttons/dropdowns.html"><span class="nav-icon"></span> Dropdowns</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="charts.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
-        </svg>
-        Users</a></li>
-    <li class="nav-group d-none"><a class="nav-link nav-group-toggle" href="#">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-        </svg>
-        Notifications</a>
-      <ul class="nav-group-items">
-        <li class="nav-item"><a class="nav-link" href="notifications/alerts.html"><span class="nav-icon"></span> Alerts</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="notifications/badge.html"><span class="nav-icon"></span>
-            Badge</a></li>
-        <li class="nav-item"><a class="nav-link" href="notifications/modals.html"><span class="nav-icon"></span> Modals</a>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="notifications/toasts.html"><span class="nav-icon"></span> Toasts</a>
-        </li>
-      </ul>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="widgets.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bank"></use>
-        </svg>
-        Dinas Kabupaten Kota</a></li>
-    <li class="nav-item"><a class="nav-link" href="widgets.html">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-medical-cross"></use>
-        </svg>
-        Puskesmas</a></li>
-    <li class="nav-divider"></li>
-    <li class="nav-title">Extras</li>
-    <li class="nav-group"><a class="nav-link " href="#">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-hospital"></use>
-        </svg>
-        Kontak Rumah Sakit</a>
-    </li>
-    <li class="nav-group"><a class="nav-link " href="#">
-        <svg class="nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-file"></use>
-        </svg>
-        Dokumentasi</a>
-    </li>
-  </ul>
-  <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
-</div>
+  <!-- /.sidebar -->
+</aside>

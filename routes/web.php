@@ -31,7 +31,6 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::middleware(Authenticate::class)->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
-
     Route::resource('user', AuthController::class);
 
     // Laporan DBD

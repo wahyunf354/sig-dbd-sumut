@@ -1,18 +1,30 @@
 @extends('admin.layouts.index')
+@section('title', 'SIG DBD SUMUT | Laporan DBD Sumatera Utara')
 
 @section('content')
-  <div class="container-lg">
-    <div class="row">
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="d-flex justify-content-between">
-            <div>
-              <h4 class="card-title mb-0">Laporan DBD</h4>
-              <div class="small text-medium-emphasis"></div>
-            </div>
-          </div>
-          <div class="c-chart-wrapper" style="height:300px;margin-top:40px;">
-            <table class="table" id="table_laporan_dbd_file">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Laporan DBD Kabupaten Kota</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="card mb-4`">
+          <div class="card-body">
+            <table class="table table-bordered table-striped" id="table_laporan_dbd_file">
               <thead>
               <tr>
                 <th>No</th>
@@ -39,15 +51,8 @@
                     <td>{{$row->tahun}}</td>
                     <td>
                       <a href="{{asset('files')}}/laporanDBD/{{$row->laporan_file}}"
-                         data-coreui-container="body"
-                         class="btn btn-sm btn-link"
-                         data-coreui-toggle="popover"
-                         data-coreui-placement="bottom"
-                         data-coreui-content="Download File"
-                         data-coreui-trigger="hover focus">
-                        <svg class="nav-icon" width="50" height="25">
-                          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-cloud-download"></use>
-                        </svg>
+                         class="btn btn-sm btn-link">
+                        <i class="fas fa-download"></i>
                       </a>
                     </td>
                     <td>{{$row->user->name}}</td>
@@ -66,18 +71,24 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 @endsection
 @section("script")
   <script>
-    $(document).ready(function () {
-      $('#table_laporan_dbd_file').DataTable({
-        "lengthChange": false,
-        "language": {
-          "search": "",
-          "searchPlaceholder": "Search..."
-        }
-      });
+    $(function () {
+      $("#table_laporan_dbd_file").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#table_laporan_dbd_file_wrapper .col-md-6:eq(0)');
+      // $('#example2').DataTable({
+      //   "paging": true,
+      //   "lengthChange": false,
+      //   "searching": false,
+      //   "ordering": true,
+      //   "info": true,
+      //   "autoWidth": false,
+      //   "responsive": true,
+      // });
     });
   </script>
 @endsection

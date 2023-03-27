@@ -24,7 +24,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{{route('admin.laporandbd.index')}}" class="nav-link">
+          <a href="{{route('admin.dashboard')}}" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -32,7 +32,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('admin.uploadLaporanDBD')}}" class="nav-link">
+          <a href="{{route('admin.laporandbd.index')}}" class="nav-link">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
               Laporan DBD
@@ -41,7 +41,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{route('admin.post.uploadLaporanDBD')}}" class="nav-link">
+          <a href="{{route('admin.uploadLaporanDBD')}}" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
               Upload Laporan DBD
@@ -51,7 +51,7 @@
         <li class="nav-header text-uppercase">Ringkasan Deman Dengue</li>
         <li class="nav-item">
           <a href="pages/calendar.html" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
+            <i class="nav-icon far fa-map"></i>
             <p>
               Semua
             </p>
@@ -59,7 +59,7 @@
         </li>
         <li class="nav-item">
           <a href="pages/calendar.html" class="nav-link">
-            <i class="nav-icon far fa-calendar-alt"></i>
+            <i class="nav-icon fas fa-percentage"></i>
             <p>
               Incident Rate
             </p>
@@ -67,7 +67,7 @@
         </li>
         <li class="nav-item">
           <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon far fa-image"></i>
+            <i class="nav-icon fas fa-skull-crossbones"></i>
             <p>
               CFR
             </p>
@@ -75,7 +75,7 @@
         </li>
         <li class="nav-item">
           <a href="pages/kanban.html" class="nav-link">
-            <i class="nav-icon fas fa-columns"></i>
+            <i class="nav-icon fas fa-bug"></i>
             <p>
               Angka Bebas Jentik
             </p>
@@ -90,40 +90,46 @@
         </li>
         <li class="nav-item">
           <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-            <i class="nav-icon fas fa-file"></i>
-            <p>Kabupaten atau Kota</p>
+            <i class="nav-icon fas fa-medkit  "></i>
+            <p>Dinas Kabupaten Kota</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <i class="nav-icon fas fa-stethoscope  "></i>
+            <p>Puskesmas</p>
           </a>
         </li>
         <li class="nav-header text-uppercase">PELAYANAN MASYARAKAT</li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fas fa-circle nav-icon"></i>
+            <i class="fas fa-hospital nav-icon"></i>
             <p>Kotak Rumah Sakit</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fas fa-circle nav-icon"></i>
+            <i class="fas fa-envelope-open-text nav-icon"></i>
             <p>Pengaduan</p>
           </a>
         </li>
-        <li class="nav-header">LABELS</li>
+        <li class="nav-header">INFORMASI</li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fa-circle text-danger"></i>
-            <p class="text">Important</p>
+            <i class="nav-icon far fa-address-card"></i>
+            <p>About</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fa-circle text-warning"></i>
-            <p>Warning</p>
+            <i class="nav-icon fas fa-book"></i>
+            <p class="text">Dokumentasi</p>
           </a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon far fa-circle text-info"></i>
-            <p>Informational</p>
+            <i class="nav-icon fas fa-robot"></i>
+            <p>Author</p>
           </a>
         </li>
       </ul>

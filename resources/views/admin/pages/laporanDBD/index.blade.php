@@ -1,5 +1,5 @@
 @extends('admin.layouts.index')
-@section('title', 'SIG DBD SUMUT | Laporan DBD Sumatera Utara')
+@section('title', 'Laporan DBD Sumatera Utara | SIG DBD SUMUT')
 
 @section('content')
   <!-- Content Header (Page header) -->

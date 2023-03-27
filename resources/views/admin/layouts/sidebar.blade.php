@@ -50,10 +50,10 @@
         </li>
         <li class="nav-header text-uppercase">Ringkasan Deman Dengue</li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
+          <a href="{{route('admin.dbd.peta.sebaran')}}" class="nav-link">
             <i class="nav-icon far fa-map"></i>
             <p>
-              Semua
+              Peta Sebaran
             </p>
           </a>
         </li>

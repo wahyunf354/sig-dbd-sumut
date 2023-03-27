@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DBDController;
 use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -37,5 +38,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');
+
+    // Peta Sebaran DBD
+    Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
   });
 });

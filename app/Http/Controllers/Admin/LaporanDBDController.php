@@ -23,7 +23,6 @@ class LaporanDBDController extends Controller
   public function index()
   {
     $laporaDbds = LaporanDbdFiles::all();
-//    dd($laporaDbds);
 
     return view('admin.pages.laporanDBD.index', compact('laporaDbds'));
   }

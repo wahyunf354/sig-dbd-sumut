@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\DateHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExcelController;
 use App\Imports\LaporanDbdImport;
 use App\Models\KabupatenOrKotaSumut;
 use App\Models\LaporanDBD;
 use App\Models\LaporanDbdFiles;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\Auth;
@@ -20,13 +22,16 @@ use RealRashid\SweetAlert\Facades\Alert;
 class LaporanDBDController extends Controller
 {
 
+  public function __construct(private DateHelper $dateHelper)
+  {
+  }
+
   public function index()
   {
     $laporaDbds = LaporanDbdFiles::all();
 
     return view('admin.pages.laporanDBD.index', compact('laporaDbds'));
   }
-
 
   public function showUploadLaporan()
   {
@@ -98,6 +103,15 @@ class LaporanDBDController extends Controller
       Alert::error("Terjadi Masalah", 'Terjadi masalah pada sistem database');
       return redirect()->back();
     }
+  }
+
+  public function showDetailLaporan($id)
+  {
+    $laporanDbdFile = LaporanDbdFiles::find($id);
+
+    $monthName = $this->dateHelper->numberToMonth($laporanDbdFile->bulan);
+
+    return view('admin.pages.laporanDBD.detail', compact('laporanDbdFile', 'monthName'));
   }
 
 }

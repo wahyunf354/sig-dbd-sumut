@@ -28,7 +28,7 @@ class LaporanDbdFiles extends Model
 
   public function laporanDbd()
   {
-    return $this->hasMany(LaporanDBD::class);
+    return $this->hasMany(LaporanDBD::class, 'laporan_dbd_file_id');
   }
 
   public function user()

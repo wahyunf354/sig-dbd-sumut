@@ -47,5 +47,4 @@
 <script src="{{asset('admin')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="{{asset('admin')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-</body>
-</html>
+<script src="{{asset('assets')}}/vendor/leaflet/leaflet.js"></script>

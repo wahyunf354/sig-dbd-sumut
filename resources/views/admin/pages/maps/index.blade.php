@@ -48,6 +48,59 @@
 
     L.geoJson().addTo(map);
 
+    let dataKabKota = JSON.parse('<?= $jsonDataKabKota ?>')
+    extractGeoJsonAndDisplay(dataKabKota)
+
+    function extractGeoJsonAndDisplay(data) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          let features = []
+          data.forEach(async (data, i, arr) => {
+            const styleGis = style(data);
+            const res = await fetch("{{asset('assets')}}/geojson/" + data.file_geojson)
+            const result = await res.json()
+
+            Object.assign(result.features[0].properties, data)
+
+            geoJson = L.geoJSON(result, {
+              style: styleGis,
+            }).addTo(map).bindPopup('<b>' + data.kabupaten + '</b><br/>Terkonfirmasi ' + (data.konfirmasi / data.jmlpddk * 100).toFixed(2) + '%' +
+              '<br/>Meninggal ' + (data.meninggal / data.konfirmasi * 100).toFixed(2) + '%' +
+              '<br/>Sembuh ' + (data.sembuh / data.konfirmasi * 100).toFixed(2) + '%')
+            resolve("Success")
+          })
+        } catch (error) { 
+          reject(error)
+        }
+      })
+    }
+
+    function getColor(data) {
+      d = data.keterangan
+      if (d == "TIDAK TERDAMPAK") {
+        return '#049B31'
+      } else if (d == "TIDAK ADA KASUS") {
+        return '#049B31'
+      } else if (d == "RESIKO RENDAH") {
+        return '#FFFF01'
+      } else if (d == "RESIKO SEDANG") {
+        return '#FF6600'
+        // return '#FFFF01'
+      } else if (d == "RESIKO TINGGI") {
+        return "#FE0000"
+      }
+    }
+
+    function style(data) {
+      return {
+        'fillColor': '#049B31',
+        "color": "black",
+        "weight": "1",
+        "opacity": "0.4",
+        "fillOpacity": "0.7"
+      }
+    }
+
   </script>
 @endsection
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DBDController;
 use App\Http\Controllers\Admin\LaporanDBDController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authenticate;
@@ -32,7 +33,9 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::middleware(Authenticate::class)->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
-    Route::resource('user', AuthController::class);
+
+    // User
+    Route::resource('user', UserController::class);
 
     // Laporan DBD
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');

@@ -12,6 +12,8 @@ class DBDController extends Controller
   {
     $dataKabKota = KabupatenOrKotaSumut::all();
 
-    return view('admin.pages.maps.index', compact('dataKabKota'));
+    $jsonDataKabKota = json_encode($dataKabKota);
+
+    return view('admin.pages.maps.index', compact('jsonDataKabKota'));
   }
 }

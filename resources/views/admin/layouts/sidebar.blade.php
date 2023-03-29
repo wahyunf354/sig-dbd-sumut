@@ -83,7 +83,7 @@
         </li>
         <li class="nav-header text-uppercase">Administrasi</li>
         <li class="nav-item">
-          <a href="iframe.html" class="nav-link">
+          <a href="{{ route('user.index') }}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>Akun</p>
           </a>

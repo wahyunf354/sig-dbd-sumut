@@ -76,19 +76,14 @@
     }
 
     function getColor(data) {
-      d = data.keterangan
-      if (d == "TIDAK TERDAMPAK") {
-        return '#049B31'
-      } else if (d == "TIDAK ADA KASUS") {
-        return '#049B31'
-      } else if (d == "RESIKO RENDAH") {
-        return '#FFFF01'
-      } else if (d == "RESIKO SEDANG") {
-        return '#FF6600'
-        // return '#FFFF01'
-      } else if (d == "RESIKO TINGGI") {
-        return "#FE0000"
-      }
+      const colorMap = {
+      "TIDAK TERDAMPAK": "#049B31",
+      "TIDAK ADA KASUS": "#049B31",
+      "RESIKO RENDAH": "#FFFF01",
+      "RESIKO SEDANG": "#FF6600",
+      "RESIKO TINGGI": "#FE0000"
+      };
+      return colorMap[data.keterangan] || "#000000";
     }
 
     function style(data) {

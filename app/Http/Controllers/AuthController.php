@@ -61,12 +61,19 @@ class AuthController extends Controller
   {
     // Melakukan validasi
     Validator::make($request->all(), [
-      'email' => ['required', 'email:rfc,dns'],
+      'email' => ['required'],
       'password' => ['required'],
     ])->validate();
+    
+    $user = User::where('email', $request->email)->orWhere('username', $request->email)->first();
+
+    if(empty($user)) {
+      Alert::error('Gagal', 'Credentials are wrong.');
+      return redirect()->back()->withSuccess('Credentials are wrong.');
+    }
 
     // Melakukan login
-    if ($this->userService->login($request->email, $request->password)) {
+    if ($this->userService->login($user->email, $request->password)) {
       Alert::success('Berhasil', 'Berhasil Login');
       return redirect()->route('admin.dashboard')->withSuccess("Berhasil login");
     }

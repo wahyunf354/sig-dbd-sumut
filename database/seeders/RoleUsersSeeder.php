@@ -16,6 +16,6 @@ class RoleUsersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('role_users')->insert([['name' => 'Admin'],['name' => 'Dinas Kabupaten'], ['name' => 'Puskesmas']]);
+        DB::table('role_users')->insert([['name' => 'Admin'],['name' => 'Dinas Kabupaten/Kota']]);
     }
 }

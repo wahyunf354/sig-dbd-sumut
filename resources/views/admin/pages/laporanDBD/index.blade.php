@@ -1,5 +1,5 @@
 @extends('admin.layouts.index')
-@section('title', 'SIG DBD SUMUT | Laporan DBD Sumatera Utara')
+@section('title', 'Laporan DBD Sumatera Utara | SIG DBD SUMUT')
 
 @section('content')
   <!-- Content Header (Page header) -->
@@ -60,7 +60,8 @@
                     </td>
                     <td>
                       <button class="btn btn-danger btn-sm text-white">Hapus</button>
-                      <button class="btn btn-info btn-sm text-white">Detail</button>
+                      <a href="{{route('admin.laporandbd.detail', ['id' => $row->id])}}"
+                         class="btn btn-info btn-sm text-white">Detail</a>
                     </td>
                   </tr>
                 @endforeach

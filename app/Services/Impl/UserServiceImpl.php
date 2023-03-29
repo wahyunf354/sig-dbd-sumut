@@ -3,7 +3,6 @@
 namespace App\Services\Impl;
 
 use App\Models\User;
-use App\Repository\UserRepository;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

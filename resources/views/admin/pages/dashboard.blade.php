@@ -1,5 +1,7 @@
 @extends('admin.layouts.index')
 
+@section('title', 'Dashboard | SIG DBD SUMUT')
+
 @section('content')
   <!-- Content Header (Page header) -->
   <div class="content-header">

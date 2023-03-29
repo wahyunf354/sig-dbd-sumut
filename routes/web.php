@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DBDController;
 use App\Http\Controllers\Admin\LaporanDBDController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authenticate;
@@ -23,7 +25,7 @@ Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran'])->name('peta
 
 
 Route::group(['prefix' => 'admin'], function () {
-  Route::get('login', [AuthController::class, 'showLogin'])->name("admin.login");
+  Route::get('login', [AuthController::class, 'showLogin'])->name("admin.login")->middleware(\App\Http\Middleware\AlreadyAuth::class);
   Route::post('login', [AuthController::class, 'doLogin'])->name("admin.post.login");
   Route::get('register', [AuthController::class, 'showRegister'])->name("admin.register");
   Route::post('register', [AuthController::class, 'doRegister'])->name("admin.post.register");
@@ -31,11 +33,17 @@ Route::group(['prefix' => 'admin'], function () {
 
   Route::middleware(Authenticate::class)->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
-    Route::resource('user', AuthController::class);
+
+    // User
+    Route::resource('user', UserController::class);
 
     // Laporan DBD
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');
+    Route::get('laporandbd/{id}', [LaporanDBDController::class, 'showDetailLaporan'])->name('admin.laporandbd.detail');
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');
+
+    // Peta Sebaran DBD
+    Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
   });
 });

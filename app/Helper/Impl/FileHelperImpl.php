@@ -14,4 +14,15 @@ class FileHelperImpl implements FileHelper {
 
     return $filename;
   }
+
+  public function deleteFile($fileDest): bool
+  {
+    if (file_exists($fileDest)) {
+      $result = unlink($fileDest);
+      if($result) {
+        return true;
+      } 
+    }
+    return false;
+  }
 }

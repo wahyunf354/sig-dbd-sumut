@@ -55,6 +55,11 @@
                         <td>{{number_format($row['jmlpddk'], 0, ',', '.')}}</td>
                         <td>
                           <a href="{{route('kabkota.edit', $row['id'])}}" class="btn btn-primary btn-sm" >Edit</a>
+                          <form action="{{route('kabkota.destroy', $row['id'])}}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                        </form>
                         </td>
                       </tr>
                     @endforeach

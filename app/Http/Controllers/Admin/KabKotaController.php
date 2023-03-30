@@ -102,7 +102,34 @@ class KabKotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'nama' => 'required|max:255',
+            'luas' => 'required|numeric',
+            'jmlpddk' => 'required|numeric',
+            'file_geojson' => 'nullable',
+        ]);
+
+        $kabupatenKota = KabupatenOrKotaSumut::find($id);
+        $kabupatenKota->nama = $request->nama;
+        $kabupatenKota->luas = $request->luas;
+        $kabupatenKota->jmlpddk = $request->jmlpddk;
+
+        $filenameNew = $kabupatenKota->file_geojson;
+        if ($request->hasFile('file_geojson')) {
+            $resultDeleteFile = $this->fileHelper->deleteFile(public_path('assets/geojson/'.$filenameNew));
+            if ($resultDeleteFile) {
+                $filenameNew = $this->fileHelper->uploadFile($request->file('file_geojson'), public_path('assets/geojson/'), "");
+            } else {
+                Alert::error('Gagal', 'Gagal mengganti file');
+                return redirect()->back();
+            }
+        }
+
+        $kabupatenKota->file_geojson = $filenameNew;
+        $kabupatenKota->save();
+
+        Alert::success('Berhasil', "Berhasil mengubah data Kabupaten/Kota");
+        return redirect()->route('kabkota.index');
     }
 
     /**
@@ -113,6 +140,8 @@ class KabKotaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        KabupatenOrKotaSumut::destroy($id);
+        Alert::warning('Berhasil', 'Berhasil menghapus data');
+        return redirect()->route('kabkota.index'); 
     }
 }

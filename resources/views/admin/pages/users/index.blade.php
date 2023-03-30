@@ -24,7 +24,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
         <div class="card">
           <div class="card-body">
             <a href="{{route('user.create')}}" class="btn btn-sm btn-primary"><i class="fas fa-plus mr-2"></i> Tambah User</a>
@@ -43,7 +43,7 @@
               <tbody>
                 @if(count($users) <= 0)
                   <tr>
-                    <td class="text-center"  >Tidak ada data</td>
+                    <td class="text-center">Tidak ada data</td>
                   </tr>
                 @else
                   @foreach($users as $key => $row)
@@ -57,7 +57,7 @@
                         {!!$row->role_badge!!}
                       </td>
                       <td>
-                        <button class="btn btn-sm btn-primary">Detail</button>
+                        <button class="btn btn-sm btn-warning">Edit</button>
                         <form action="{{route('user.destroy', $row->id)}}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')

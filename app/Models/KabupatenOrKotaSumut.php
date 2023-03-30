@@ -10,7 +10,7 @@ class KabupatenOrKotaSumut extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['nama'];
+  protected $fillable = ['nama', 'luas', 'jmlpddk', 'file_geojson'];
   protected $primaryKey = "id";
 
   protected $table = 'kabupaten_or_kota_sumut';

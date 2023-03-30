@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helper\DateHelper;
+use App\Helper\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Imports\LaporanDbdImport;
 use App\Models\KabupatenOrKotaSumut;
@@ -18,7 +19,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class LaporanDBDController extends Controller
 {
 
-  public function __construct(private DateHelper $dateHelper)
+  public function __construct(private DateHelper $dateHelper, private FileHelper $fileHelper)
   {
   }
 
@@ -70,7 +71,7 @@ class LaporanDBDController extends Controller
     // Upload excel laporan DBD
     $filenameExcel = "";
     if (!empty($request->file('laporan_dbd'))) {
-      $filenameExcel = $this->uploadFileLaporan($request->file('laporan_dbd'));
+      $filenameExcel = $this->fileHelper->uploadFile($request->file('laporan_dbd'), public_path('files/laporanDBD/'), "");
     }
 
     if (empty($filenameExcel)) {

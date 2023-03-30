@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DBDController;
+use App\Http\Controllers\Admin\KabKotaController;
 use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -36,6 +37,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     // User
     Route::resource('user', UserController::class);
+    // Kabupaten Kota Suamtera Utara
+    Route::resource('kabkota', KabKotaController::class);
 
     // Laporan DBD
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');

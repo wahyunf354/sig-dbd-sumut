@@ -1,7 +1,7 @@
 {
 	"type": "FeatureCollection",
 	"name": "tebing_tinggi",
-	"crs": {
+	"crs": { 
 		"type": "name",
 		"properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
 	},

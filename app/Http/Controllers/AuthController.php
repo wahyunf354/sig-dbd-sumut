@@ -34,6 +34,7 @@ class AuthController extends Controller
 
   public function showRegister()
   {
+    abort(404);
     return view('admin.pages.auth.register');
   }
 

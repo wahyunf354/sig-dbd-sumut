@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DBDController;
+use App\Http\Controllers\Admin\InformationController;
 use App\Http\Controllers\Admin\KabKotaController;
 use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\Admin\UserController;
@@ -28,7 +29,7 @@ Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran'])->name('peta
 Route::group(['prefix' => 'admin'], function () {
   Route::get('login', [AuthController::class, 'showLogin'])->name("admin.login")->middleware(\App\Http\Middleware\AlreadyAuth::class);
   Route::post('login', [AuthController::class, 'doLogin'])->name("admin.post.login");
-  // Route::get('register', [AuthController::class, 'showRegister'])->name("admin.register");
+  Route::get('register', [AuthController::class, 'showRegister'])->name("admin.register");
   Route::post('register', [AuthController::class, 'doRegister'])->name("admin.post.register");
   Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
@@ -48,5 +49,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Peta Sebaran DBD
     Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
+
+    // information
+    Route::get('about', [InformationController::class, 'about'])->name('admin.about');
   });
 });

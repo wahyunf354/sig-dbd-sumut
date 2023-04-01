@@ -55,10 +55,10 @@
                         <td>{{number_format($row['jmlpddk'], 0, ',', '.')}}</td>
                         <td>
                           <a href="{{route('kabkota.edit', $row['id'])}}" class="btn btn-primary btn-sm" >Edit</a>
-                          <form action="{{route('kabkota.destroy', $row['id'])}}" method="POST" class="d-inline">
-                            @csrf
+                          <form action="{{route('kabkota.destroy', $row['id'])}}" method="POST" class="d-inline" >
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
+                            @csrf
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin untuk menghapus data?');" type="submit">Hapus</button>
                         </form>
                         </td>
                       </tr>

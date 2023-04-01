@@ -58,7 +58,7 @@
                       </td>
                       <td>
                         <button class="btn btn-sm btn-warning">Edit</button>
-                        <form action="{{route('user.destroy', $row->id)}}" method="POST" class="d-inline">
+                        <form action="{{route('user.destroy', $row->id)}}" method="POST" class="d-inline" onclick="return confirm('Apakah anda yakin akan menghapus?');>
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger" type="submit">Hapus</button>

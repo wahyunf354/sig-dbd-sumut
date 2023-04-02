@@ -10,13 +10,17 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
+      <div class="image d-none">
         <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2"
-             alt="User Image">
+          alt="User Image">
       </div>
-      <div class="info">
-        <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+      <div class="info text-center">
+        <p class="d-block"><strong class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</strong><br>
+        @if(Auth::user()->kabkota_id != null)
+          {{Auth::user()->kabkota->nama}}
+        @endif
+        </p>
       </div>
     </div>
 
@@ -89,18 +93,18 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+          <a href="{{route('kabkota.index')}}" class="nav-link">
             <i class="nav-icon fas fa-medkit  "></i>
-            <p>Dinas Kabupaten Kota</p>
+            <p>Kabupaten/Kota</p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none">
           <a href="https://adminlte.io/docs/3.1/" class="nav-link">
             <i class="nav-icon fas fa-stethoscope  "></i>
             <p>Puskesmas</p>
           </a>
         </li>
-        <li class="nav-header text-uppercase">PELAYANAN MASYARAKAT</li>
+        {{-- <li class="nav-header text-uppercase">PELAYANAN MASYARAKAT</li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fas fa-hospital nav-icon"></i>
@@ -112,26 +116,20 @@
             <i class="fas fa-envelope-open-text nav-icon"></i>
             <p>Pengaduan</p>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-header">INFORMASI</li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('admin.about')}}" class="nav-link">
             <i class="nav-icon far fa-address-card"></i>
             <p>About</p>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-book"></i>
             <p class="text">Dokumentasi</p>
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-robot"></i>
-            <p>Author</p>
-          </a>
-        </li>
+        </li> --}}`
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

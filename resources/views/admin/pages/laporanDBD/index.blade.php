@@ -11,8 +11,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Laporan DBD</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -22,6 +22,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-12">
         <div class="card mb-4`">
           <div class="card-body">
             <table class="table table-bordered table-striped" id="table_laporan_dbd_file">
@@ -69,6 +70,7 @@
               </tbody>
             </table>
           </div>
+        </div>
         </div>
       </div>
     </div>

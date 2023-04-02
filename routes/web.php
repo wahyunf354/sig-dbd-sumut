@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DBDController;
+use App\Http\Controllers\Admin\InformationController;
+use App\Http\Controllers\Admin\KabKotaController;
 use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -35,7 +37,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
 
     // User
-    Route::resource('user', UserController::class);
+    Route::middleware(['admin'])->group(function() {
+      Route::resource('user', UserController::class)->except(['index']);
+    });
+    Route::resource('user', UserController::class)->only(['index']);
+    // Kabupaten Kota Suamtera Utara
+    Route::resource('kabkota', KabKotaController::class);
 
     // Laporan DBD
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');
@@ -45,5 +52,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Peta Sebaran DBD
     Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
+
+    // information
+    Route::get('about', [InformationController::class, 'about'])->name('admin.about');
   });
 });

@@ -196,7 +196,8 @@ return [
     App\Providers\EventServiceProvider::class,
     App\Providers\RouteServiceProvider::class,
     App\Providers\DateHelperProvider::class,
-    App\Providers\UserServiceProvider::class
+    App\Providers\UserServiceProvider::class,
+    App\Providers\FileHelperProvider::class,
   ],
 
   /*

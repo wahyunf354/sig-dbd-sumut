@@ -40,10 +40,12 @@
 @section('script')
   <script>
     var map = L.map('map').setView([2.5953371, 98.8685835], 8);
+	var mapAccessToken = 'pk.eyJ1IjoibWVoYWtzYWNoZGV2YSIsImEiOiJjaXF2YTNvYWIwMDA1ZmttZzBsNTM1NXV1In0.-SA7eLZOeeYkVPG7Jek2ug';
 
-    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token='+mapAccessToken, {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      id: 'mapbox.light',
+      attribution: 'Mapbox'
     }).addTo(map);
 
     L.geoJson().addTo(map);
@@ -76,19 +78,14 @@
     }
 
     function getColor(data) {
-      d = data.keterangan
-      if (d == "TIDAK TERDAMPAK") {
-        return '#049B31'
-      } else if (d == "TIDAK ADA KASUS") {
-        return '#049B31'
-      } else if (d == "RESIKO RENDAH") {
-        return '#FFFF01'
-      } else if (d == "RESIKO SEDANG") {
-        return '#FF6600'
-        // return '#FFFF01'
-      } else if (d == "RESIKO TINGGI") {
-        return "#FE0000"
-      }
+      const colorMap = {
+      "TIDAK TERDAMPAK": "#049B31",
+      "TIDAK ADA KASUS": "#049B31",
+      "RESIKO RENDAH": "#FFFF01",
+      "RESIKO SEDANG": "#FF6600",
+      "RESIKO TINGGI": "#FE0000"
+      };
+      return colorMap[data.keterangan] || "#000000";
     }
 
     function style(data) {

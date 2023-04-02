@@ -12,7 +12,7 @@
           class="col-lg-6 d-flex flex-column align-items-center justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
           data-aos="fade-up" data-aos-delay="200">
           <h1>Peta Sebaran DBD</h1>
-          <h2 class="text-center">Suamtera Utara</h2>
+          <h2 class="text-center">Sumatera Utara</h2>
         </div>
       </div>
     </div>

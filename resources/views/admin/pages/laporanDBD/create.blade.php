@@ -12,8 +12,9 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.laporandbd.index')}}">Laporan DBD</a></li>
+            <li class="breadcrumb-item active">Upload Laporan DBD</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -33,12 +34,19 @@
 
                 <div class="form-group">
                   <label for="kabkota_id">Kabupate atau Kota <span class="text-danger">*</span> </label>
-                  <select class="form-control-sm form-control" name="kabkota_id" id="kabkota_id">
-                    <option value="">-- Pilih Kabupaten Atau Kota --</option>
-                    @foreach($kabKotas as $kabKota)
-                      <option value="{{$kabKota->id}}">{{$kabKota->nama}}</option>
-                    @endforeach
-                  </select>
+                  @if(Auth::user()->role_user_id == '2' && Auth::user()->kabkota_id != null)
+                    <select class="form-control-sm form-control" name="kabkota_id" id="kabkota_id" readonly>
+                      <option value="{{Auth::user()->kabkota_id}}">{{Auth::user()->kabkota->nama}}</option>
+                    </select>
+                  @else
+                    <select class="form-control-sm form-control" name="kabkota_id" id="kabkota_id">
+                      <option value="">-- Pilih Kabupaten Atau Kota --</option>
+                      @foreach($kabKotas as $kabKota)
+                          <option value="{{$kabKota->id}}">{{$kabKota->nama}}</option>
+                        
+                      @endforeach
+                    </select>
+                  @endif
                 </div>
 
 
@@ -68,10 +76,9 @@
                 <div class="form-group">
                   <label for="custom-file-label">File Laporan <span class="text-danger">*</span> </label>
 
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="laporan_dbd" name="laporan_dbd"
-                           value="{{old("laporan_dbd")}}">
-                    <label class="custom-file-label" for="laporan_dbd">Choose file</label>
+                  <div class="">
+                    <input type="file" class="" id="laporan_dbd" name="laporan_dbd"
+                          value="{{old("laporan_dbd")}}">
                   </div>
 
                   <small>Form laporan harus sesuai</small>
@@ -93,5 +100,5 @@
       </div>
     </div>
   </section>
-
 @endsection
+

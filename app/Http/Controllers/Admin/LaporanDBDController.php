@@ -25,7 +25,16 @@ class LaporanDBDController extends Controller
 
   public function index()
   {
-    $laporaDbds = LaporanDbdFiles::all();
+    if (Auth::user()->role_user_id == 1) {
+      $laporaDbds = LaporanDbdFiles::all();
+    } else {
+      if (Auth::user()->kabkota_id) {
+        $laporaDbds = LaporanDbdFiles::where('kabkota_id', Auth::user()->kabkota_id)->get();
+      } else {
+        Alert::warning('User tidak diizinkan untuk mengakses halaman');
+        return redirect()->route('admin.dashboard');
+      }
+    }
 
     return view('admin.pages.laporanDBD.index', compact('laporaDbds'));
   }
@@ -43,14 +52,14 @@ class LaporanDBDController extends Controller
     return view('admin.pages.laporanDBD.create', compact('years', 'yearNow', 'mounts', 'kabKotas'));
   }
 
-  public function uploadFileLaporan($file)
-  {
-    $extention = $file->getClientOriginalExtension();
-    $filename = SupportCarbon::now()->timestamp . '.' . $extention;
-    $file->move(public_path('files/laporanDBD/'), $filename);
+  // public function uploadFileLaporan($file)
+  // {
+  //   $extention = $file->getClientOriginalExtension();
+  //   $filename = SupportCarbon::now()->timestamp . '.' . $extention;
+  //   $file->move(public_path('files/laporanDBD/'), $filename);
 
-    return $filename;
-  }
+  //   return $filename;
+  // }
 
   public function uploadLaporan(Request $request)
   {
@@ -66,6 +75,16 @@ class LaporanDBDController extends Controller
     if ($validator->fails()) {
       Alert::error('Invalid Input', 'Terdapat masalah pada input yang diberikan');
       return redirect()->back()->withErrors($validator)->withInput($request->all());
+    }
+
+    if(Auth::user()->role_user_id != 1) {
+      if (Auth::user()->role_user_id != 2){
+      } else {
+        if ($request->kabkota_id != Auth::user()->kabkota_id){
+          Alert::warning('User tidak diizinkan untuk melakukan tindakan ini');
+          return redirect()->route('admin.dashboard');
+        }
+      }
     }
 
     // Upload excel laporan DBD

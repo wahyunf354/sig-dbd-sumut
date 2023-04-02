@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(RoleUser::class, 'role_user_id');
     }
+
+    public function kabkota()
+    {
+        return $this->belongsTo(KabupatenOrKotaSumut::class, 'kabkota_id');
+    }
 }

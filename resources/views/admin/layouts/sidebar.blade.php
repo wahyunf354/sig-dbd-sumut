@@ -10,13 +10,17 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
+      <div class="image d-none">
         <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2"
-             alt="User Image">
+          alt="User Image">
       </div>
-      <div class="info">
-        <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+      <div class="info text-center">
+        <p class="d-block"><strong class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</strong><br>
+        @if(Auth::user()->kabkota_id != null)
+          {{Auth::user()->kabkota->nama}}
+        @endif
+        </p>
       </div>
     </div>
 

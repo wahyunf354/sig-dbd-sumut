@@ -37,7 +37,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
 
     // User
-    Route::resource('user', UserController::class);
+    Route::middleware(['admin'])->group(function() {
+      Route::resource('user', UserController::class)->except(['index']);
+    });
+    Route::resource('user', UserController::class)->only(['index']);
     // Kabupaten Kota Suamtera Utara
     Route::resource('kabkota', KabKotaController::class);
 

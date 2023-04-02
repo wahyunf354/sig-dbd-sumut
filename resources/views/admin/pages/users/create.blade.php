@@ -68,6 +68,15 @@
                     @endforeach
                 </select>
             </div>
+            <div class="form-group" id="input-kab-kota">
+                <label for="role">Kabupate/Kota</label>
+                <select class="form-control" name="kabkota_id" id="kabkota_id">
+                    <option value="">-- Pilih Kabupaten/Kota --</option>
+                    @foreach($kabKotas as $kabKota)
+                      <option value="{{$kabKota->id}}">{{ $kabKota->nama }}</option>
+                    @endforeach
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
           </div>
@@ -76,4 +85,18 @@
       </div>
     </div>
   </section>
+@endsection
+@section('script')
+  <script>
+    $(function () {
+      $("#input-kab-kota").hide();
+      $("#role").change(function() {
+        if($(this).val() == '2'){
+          $("#input-kab-kota").show();
+        } else {
+          $("#input-kab-kota").hide();
+        }
+      })
+    });
+  </script>
 @endsection

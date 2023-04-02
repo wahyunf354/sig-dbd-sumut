@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\KabupatenOrKotaSumut;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,7 +41,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = RoleUser::all();
-        return view('admin.pages.users.create', compact('roles'));
+        $kabKotas = KabupatenOrKotaSumut::all();
+        return view('admin.pages.users.create', compact('roles', 'kabKotas'));
     }
 
     /**
@@ -66,6 +68,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->role_user_id = $request->role;
+        $user->kabkota_id = $request->kabkota_id != "" ? $request->kabkota_id : null;
         $user->save();
     
         // Redirect ke halaman lain dengan pesan sukses

@@ -22,6 +22,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-12">
         <div class="card mb-4`">
           <div class="card-body">
             <table class="table table-bordered table-striped" id="table_laporan_dbd_file">
@@ -69,6 +70,7 @@
               </tbody>
             </table>
           </div>
+        </div>
         </div>
       </div>
     </div>

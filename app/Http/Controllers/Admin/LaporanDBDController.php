@@ -7,14 +7,18 @@ use App\Helper\FileHelper;
 use App\Http\Controllers\Controller;
 use App\Imports\LaporanDbdImport;
 use App\Models\KabupatenOrKotaSumut;
+use App\Models\LaporanDBD;
 use App\Models\LaporanDbdFiles;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon as SupportCarbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+
+use function PHPUnit\Framework\isEmpty;
 
 class LaporanDBDController extends Controller
 {
@@ -114,7 +118,7 @@ class LaporanDBDController extends Controller
 
     if ($result) {
       Alert::success("Berhasil", "Berhasil melakukan upload laporan DBD");
-      return redirect()->route('admin.dashboard');
+      return redirect()->route('admin.laporandbd.index');
     } else {
       Alert::error("Terjadi Masalah", 'Terjadi masalah pada sistem database');
       return redirect()->back();
@@ -128,6 +132,16 @@ class LaporanDBDController extends Controller
     $monthName = $this->dateHelper->numberToMonth($laporanDbdFile->bulan);
 
     return view('admin.pages.laporanDBD.detail', compact('laporanDbdFile', 'monthName'));
+  }
+
+  public function showDetailOneLaporan(Request $request)
+  {
+    $id = $request->input('id');
+    
+    $laporandbd = LaporanDBD::find($id);
+    
+
+    return response()->json($laporandbd);
   }
 
 }

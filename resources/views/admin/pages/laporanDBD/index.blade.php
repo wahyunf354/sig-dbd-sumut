@@ -52,7 +52,7 @@
                     <td>{{$row->tahun}}</td>
                     <td>
                       <a href="{{asset('files')}}/laporanDBD/{{$row->laporan_file}}"
-                         class="btn btn-sm btn-link">
+                        class="btn btn-sm btn-link">
                         <i class="fas fa-download"></i>
                       </a>
                     </td>

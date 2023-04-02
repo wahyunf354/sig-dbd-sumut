@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Laporan DBD
     Route::get('laporandbd', [LaporanDBDController::class, 'index'])->name('admin.laporandbd.index');
+    Route::post('laporandbd/detail', [LaporanDBDController::class, 'showDetailOneLaporan'])->name('admin.laporandbdb.one.detail');
     Route::get('laporandbd/{id}', [LaporanDBDController::class, 'showDetailLaporan'])->name('admin.laporandbd.detail');
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');

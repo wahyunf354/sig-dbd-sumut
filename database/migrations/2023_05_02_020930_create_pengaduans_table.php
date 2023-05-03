@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('kabkota_id')->nullable()->requiredIf('role_user_id', '==', 2);
-            $table->foreign('kabkota_id')->references('id')->on('kabupaten_or_kota_sumut');
+        Schema::create('pengaduans', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string("email");
+            $table->string("subject");
+            $table->string("message")->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('kabkota_id');
-        });
+        Schema::dropIfExists('pengaduans');
     }
 };

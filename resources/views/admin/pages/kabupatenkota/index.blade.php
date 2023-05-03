@@ -78,7 +78,7 @@
 
 @section('script')
   <script>
-      $(function () {
+    $(function () {
       $("#table_kab_kota").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
       });

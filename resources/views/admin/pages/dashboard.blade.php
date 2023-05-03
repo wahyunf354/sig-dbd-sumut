@@ -111,7 +111,7 @@
               <div class="tab-content p-0">
                 <!-- Morris chart - Sales -->
                 <div class="chart tab-pane active" id="revenue-chart"
-                     style="position: relative; height: 300px;">
+                    style="position: relative; height: 300px;">
                   <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
                 </div>
               </div>
@@ -145,8 +145,7 @@
               <div class="row">
                 <div class="col-4 text-center">
                   <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
+                        data-fgColor="#39CCCC">
                   <div class="text-white">Mail-Orders</div>
                 </div>
                 <!-- ./col -->

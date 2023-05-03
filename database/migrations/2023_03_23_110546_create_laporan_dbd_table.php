@@ -61,7 +61,7 @@ return new class extends Migration {
       $table->integer('jumlah_kasus_meninggal')->default(0);
 
       $table->float('ir_dbd')->default(0);
-      $table->float('crf_dbd')->default(0);
+      $table->float('cfr_dbd')->default(0);
       $table->integer('jumlah_desakel_penyelidikan_epidemologi')->default(0);
       $table->integer('jumlah_desakel_psn_dbd_3mp_masal')->default(0);
       $table->integer('jumlah_rumah_bangunan_larvasidasi')->default(0);

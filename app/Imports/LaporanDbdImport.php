@@ -66,7 +66,7 @@ class LaporanDbdImport implements ToCollection, WithCalculatedFormulas
           'jumlah_kasus_penderita' => $row[33],
           'jumlah_kasus_meninggal' => $row[34],
           'ir_dbd' => $row[35],
-          'crf_dbd' => $row[36],
+          'cfr_dbd' => $row[36],
           'jumlah_desakel_penyelidikan_epidemologi' => $row[37],
           'jumlah_desakel_psn_dbd_3mp_masal' => $row[38],
           'jumlah_rumah_bangunan_larvasidasi' => $row[39],

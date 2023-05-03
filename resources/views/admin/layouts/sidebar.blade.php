@@ -3,20 +3,20 @@
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
     <img src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="AdminLTE Logo"
-         class="brand-image">
+        class="brand-image">
     <span class="brand-text font-weight-light">SIG DBD SUMUT</span>
   </a>
 
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex justify-content-center">
+    <div class="user-panel d-flex justify-content-center">
       <div class="image d-none">
         <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2"
           alt="User Image">
       </div>
       <div class="info text-center">
-        <p class="d-block"><strong class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</strong><br>
+        <p class="mb-0"><strong class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</strong><br>
         @if(Auth::user()->kabkota_id != null)
           {{Auth::user()->kabkota->nama}}
         @endif
@@ -110,13 +110,13 @@
             <i class="fas fa-hospital nav-icon"></i>
             <p>Kotak Rumah Sakit</p>
           </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route("admin.pengaduan")}}" class="nav-link">
             <i class="fas fa-envelope-open-text nav-icon"></i>
             <p>Pengaduan</p>
           </a>
-        </li> --}}
+        </li>
         <li class="nav-header">INFORMASI</li>
         <li class="nav-item">
           <a href="{{route('admin.about')}}" class="nav-link">

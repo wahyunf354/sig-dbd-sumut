@@ -46,7 +46,7 @@ class LaporanDBD extends Model
     'jumlah_kasus_penderita',
     'jumlah_kasus_meninggal',
     'ir_dbd',
-    'crf_dbd',
+    'cfr_dbd',
     'jumlah_desakel_penyelidikan_epidemologi',
     'jumlah_desakel_psn_dbd_3mp_masal',
     'jumlah_rumah_bangunan_larvasidasi',

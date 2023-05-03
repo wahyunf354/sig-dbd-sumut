@@ -60,12 +60,18 @@
                       <td>{{$row->puskesmas_dijumpai_dbd}}</td>
                       <td>{{$row->desa_kelurahan_dijumpai_dbd}}</td>
                       <td>{{$row->ir_dbd}}</td>
-                      <td>{{$row->crf_dbd}}</td>
+                      <td>{{$row->cfr_dbd}}</td>
                       <td>{{$row->abj}}</td>
                     </tr>
                   @endforeach
                 @endif
                 </tbody>
+                <tfoot>
+                  <th colspan="5">Rata-rata</th>
+                  <th>{{$avg['ir']}}</th>
+                  <th>{{ $avg['cfr'] }}</th>
+                  <th>{{ $avg['abj'] }}</th>
+                </tfoot>
               </table>
             </div>
           </div>

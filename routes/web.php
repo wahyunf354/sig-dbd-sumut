@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PengaduanController;
 use App\Http\Middleware\Authenticate;
+use App\Models\Pengaduan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
 Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran'])->name('peta_sebaran');
 
+// Route::get('/admin', [AdminController::class, 'index']);
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('login', [AuthController::class, 'showLogin'])->name("admin.login")->middleware(\App\Http\Middleware\AlreadyAuth::class);
@@ -34,7 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
   Route::middleware(Authenticate::class)->group(function () {
-    Route::get('dashboard', [AdminController::class, 'index'])->name("admin.dashboard");
+    Route::get('/', [AdminController::class, 'index'])->name("admin.dashboard");
 
     // User
     Route::middleware(['admin'])->group(function() {
@@ -56,5 +59,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     // information
     Route::get('about', [InformationController::class, 'about'])->name('admin.about');
+
+    // Pengaduan
+    Route::get('pengaduan', [PengaduanController::class, 'index'])->name("admin.pengaduan");
+    Route::post('pengaduan', [PengaduanController::class, 'store'])->name("admin.pengaduan.store");
+    Route::get('pengaduan/{id}', [PengaduanController::class, 'show'])->name("admin.pengaduan.show");
+    Route::delete('pengaduan/{id}', [PengaduanController::class, 'destroy'])->name("admin.pengaduan.destroy");
   });
 });

@@ -131,7 +131,16 @@ class LaporanDBDController extends Controller
 
     $monthName = $this->dateHelper->numberToMonth($laporanDbdFile->bulan);
 
-    return view('admin.pages.laporanDBD.detail', compact('laporanDbdFile', 'monthName'));
+    $avg = [
+      'ir' => $laporanDbdFile->laporanDbd->avg('ir_dbd'),
+      'cfr' => $laporanDbdFile->laporanDbd->avg('cfr_dbd'),
+      'abj' => $laporanDbdFile->laporanDbd->avg('abj') 
+    ];
+
+
+
+
+    return view('admin.pages.laporanDBD.detail', compact('laporanDbdFile', 'monthName', 'avg'));
   }
 
   public function showDetailOneLaporan(Request $request)

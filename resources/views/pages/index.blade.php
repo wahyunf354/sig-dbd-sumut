@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-        <img src="assets/img/nyamuk.webp" class="img-fluid animated" alt="Nyamuk DBD">
+        <img src="assets/img/dbd-hero.png" class="img-fluid animated" alt="Nyamuk DBD">
       </div>
     </div>
   </div>
@@ -179,7 +179,7 @@
 
       <div class="section-title">
         <h2>Contact</h2>
-        <p>Dalam Pengembangan</p>
+        <p>Silahkan izin form berikut untuk mengajukan pesan kepada pihak Dinas Kesehatan Provinsi Sumatera Utara</p>
       </div>
 
       <div class="row">
@@ -210,29 +210,44 @@
         </div>
 
         <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <form action="{{route("admin.pengaduan.store")}}" method="post" role="form" class="php-email-form">
+            @csrf
             <div class="row">
               <div class="form-group col-md-6">
                 <label for="name">Your Name</label>
-                <input type="text" name="name" class="form-control" id="name" required>
+                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name">
+                <div class="invalid-feedback">
+                  {{$errors->first("name")}}
+                </div>
               </div>
               <div class="form-group col-md-6">
                 <label for="name">Your Email</label>
-                <input type="email" class="form-control" name="email" id="email" required>
+                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email">
+                <div class="invalid-feedback">
+                  {{$errors->first("email")}}
+                </div>
               </div>
             </div>
             <div class="form-group">
               <label for="name">Subject</label>
-              <input type="text" class="form-control" name="subject" id="subject" required>
+              <input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" id="subject">
+              <div class="invalid-feedback">
+                {{$errors->first("subject")}}
+              </div>
             </div>
             <div class="form-group">
               <label for="name">Message</label>
-              <textarea class="form-control" name="message" rows="10" required></textarea>
+              <textarea class="form-control @error('message') is-invalid @enderror" name="message" rows="10"></textarea>
+              <div class="invalid-feedback">
+                {{$errors->first("message")}}
+              </div>
             </div>
             <div class="my-3">
               <div class="loading">Loading</div>
               <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              @if(session('success'))
+              <div class="">Your message has been sent. Thank you!</div>
+              @endif
             </div>
             <div class="text-center"><button type="submit">Send Message</button></div>
           </form>

@@ -16,4 +16,9 @@ class DBDController extends Controller
 
     return view('admin.pages.maps.index', compact('jsonDataKabKota'));
   }
+
+  public function ir()
+  {
+    return view('admin.pages.');
+  }
 }

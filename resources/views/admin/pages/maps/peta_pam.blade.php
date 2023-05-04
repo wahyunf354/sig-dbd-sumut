@@ -9,7 +9,6 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">Peta Penyebaran DBD</h1>
-          <p>Berdasarkan laporan bulan {{date('n')}} tahun {{date('Y')}}</p>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -78,23 +77,20 @@
       })
     }
 
-    function getDBDColor(abj, cfr, ir) {
-      let color = '';
-      if (!abj || !cfr || !ir) {
-        color = '#FFE8D5'; // Nilai kosong
-      } else if (abj <  90 && cfr >= 1 && ir >= (10/100000)) {
-        color = '#FF4D4D'; // Keparahan Tinggi (Merah)
-      } else if ((abj >= 90 && abj < 95) && (cfr < 1 && cfr < 0) && (ir >= (5/100000) && (ir < 10/100000))) {
-        color = '#F5DE51'; // Keparahan Sedang (Oranye)
-      } else {
-        color = '#31EB6A'; // Keparahan Rendah (Kuning)
-      }
-      return color;
+    function getColor(data) {
+      const colorMap = {
+      "TIDAK TERDAMPAK": "#049B31",
+      "TIDAK ADA KASUS": "#049B31",
+      "RESIKO RENDAH": "#FFFF01",
+      "RESIKO SEDANG": "#FF6600",
+      "RESIKO TINGGI": "#FE0000"
+      };
+      return colorMap[data.keterangan] || "#000000";
     }
 
     function style(data) {
       return {
-        'fillColor': getDBDColor(data['avg_abj'], data['avg_cfr'], data['avg_ir']),
+        'fillColor': '#049B31',
         "color": "black",
         "weight": "1",
         "opacity": "0.4",

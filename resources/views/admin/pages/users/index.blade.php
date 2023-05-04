@@ -24,7 +24,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-lg-12 col-xxl-10 col-md-12 col-12">
         <div class="card">
           <div class="card-body">
             @if(Auth::user()->role_user_id == 1)

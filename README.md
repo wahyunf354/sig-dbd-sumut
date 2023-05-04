@@ -11,9 +11,10 @@
 
 ## TODO
 
-- [ ] ganti semua tentang CRF menjadi CFR
-- [ ] menampilkan detail semua nilai dari data laporan kabupaten per baris laporannya (
+- [x] ganti semua tentang CRF menjadi CFR
+- [x] menampilkan detail semua nilai dari data laporan kabupaten per baris laporannya (
   resources/views/admin/pages/laporanDBD/detail.blade.php).
+- [x] sudah buat tampilan peta berdasarkan laporan bulan terbaru
 - [ ] membuat edit user
 - [ ] membuat halaman profil user
 - [ ] membuat fitur change password user

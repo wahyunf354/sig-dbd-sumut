@@ -15,10 +15,10 @@
 - [x] menampilkan detail semua nilai dari data laporan kabupaten per baris laporannya (
   resources/views/admin/pages/laporanDBD/detail.blade.php).
 - [x] sudah buat tampilan peta berdasarkan laporan bulan terbaru
-- [ ] membuat edit user
+- [x] membuat edit user
 - [ ] membuat halaman profil user
 - [ ] membuat fitur change password user
-- [ ] membuat function update untuk akabupaten kota
+- [x] membuat function update untuk akabupaten kota
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell

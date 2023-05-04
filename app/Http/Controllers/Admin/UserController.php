@@ -8,7 +8,11 @@ use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -95,9 +99,28 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $roles = RoleUser::all();
+        $kabKotas = KabupatenOrKotaSumut::all();
+
+        return view('admin.pages.users.edit', compact('user', 'roles', 'kabKotas'));
     }
 
+    private function isUniqueUsername($username, $userId)
+    {
+        $count = User::where('username', $username)
+                    ->where('id', '!=', $userId)
+                    ->count();
+        return $count === 0;
+    }
+
+    private function isUniqueEmail($email, $userId) 
+    {
+        $count = User::where('email', $email)
+                    ->where('id', '!=', $userId)
+                    ->count();
+        return $count === 0;
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -106,8 +129,47 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $validator = Validator::make($request->all(),[
+            'name' => 'required',
+            'username' => [
+                'required', 
+                function ($attribute, $value, $fail) use ($id) {
+                    if (!$this->isUniqueUsername($value, $id)) {
+                        $fail('Username sudah digunakan.');
+                    }
+                }    
+            ],
+            'email' => [
+                'required',
+                'email',
+                function ($attribute, $value, $fail) use ($id) {
+                    if (!$this->isUniqueEmail($value, $id)) {
+                        $fail('Email sudah digunakan.');
+                    }
+                }  
+            ],
+            'role' => 'required',
+            'password' => 'nullable|min:8|confirmed',
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->role_user_id = $request->role;
+        $user->kabkota_id = $request->kabkota_id;
+        if ($request->password){
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'Data user berhasil diubah');
     }
 
     /**

@@ -44,6 +44,8 @@ Route::group(['prefix' => 'admin'], function () {
       Route::resource('user', UserController::class)->except(['index']);
     });
     Route::resource('user', UserController::class)->only(['index']);
+    Route::get('profile', [UserController::class, 'showProfile'])->name('user.profile');
+    Route::put('change-password', [UserController::class, 'changePassword'])->name('user.changePassword');
     // Kabupaten Kota Suamtera Utara
     Route::resource('kabkota', KabKotaController::class);
 

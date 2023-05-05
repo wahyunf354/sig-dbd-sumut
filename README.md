@@ -16,9 +16,12 @@
   resources/views/admin/pages/laporanDBD/detail.blade.php).
 - [x] sudah buat tampilan peta berdasarkan laporan bulan terbaru
 - [x] membuat edit user
-- [ ] membuat halaman profil user
-- [ ] membuat fitur change password user
+- [x] membuat halaman profil user
+- [ ] edit user profile
+- [x] membuat fitur change password user
 - [x] membuat function update untuk akabupaten kota
+
+- Password : tekun berkarya, hidup sejahtera, mulia berbudaya 15 April 1948 -> tbhsmb1541948
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell

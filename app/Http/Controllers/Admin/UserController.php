@@ -7,6 +7,7 @@ use App\Models\KabupatenOrKotaSumut;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -80,23 +81,44 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function showProfile() {
+        $profileUser = User::find(Auth::id());
+
+        return view('admin.pages.users.profile', compact('profileUser'));
+    }
+
+    public function changePassword(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'password_old' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+    
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $user = User::find(Auth::id());
+
+        if (!Hash::check($request->password_old, $user->password)) {
+            return redirect()->back()->with('error', 'Kata sandi yang diberikan tidak cocok dengan kata sandi saat ini Anda.');
+        }
+    
+        $user->password = Hash::make($request->password);
+        $user->save();
+    
+        return redirect()->route('user.profile')->with('success', 'Password anda berhasil diubah');
+    }
+
+    public function editProfile(Request $request) {
+        // TODO: Buat function dan tampilan edit password
+    }
+
     public function edit($id)
     {
         $user = User::find($id);

@@ -55,20 +55,20 @@
                 <b>Email</b> <a class="float-right">{{$profileUser->email}}</a>
               </li>
             </ul>
-            <a href="#" class="btn btn-primary btn-block btn-sm"><b>Edit Data</b></a>
-            <button type="button" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#modelUbahPassword"><b>Ubah Password</b></button>
+            <button type="button" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#modalEditProfile"><b>Edit Data</b></button>
+            <button type="button" class="btn btn-primary btn-block btn-sm" data-toggle="modal" data-target="#modalUbahPassword"><b>Ubah Password</b></button>
           </div>
         </div>
       </div>
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="modelUbahPassword" tabindex="-1" role="dialog" aria-labelledby="modelUbahPasswordLabel" aria-hidden="true">
+<!-- Modal Change Password-->
+<div class="modal fade" id="modalUbahPassword" tabindex="-1" role="dialog" aria-labelledby="modalUbahPasswordLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title" id="modelUbahPasswordLabel">Ubah Password</h6>
+        <h6 class="modal-title" id="modalUbahPasswordLabel">Ubah Password</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -92,6 +92,42 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-sm btn-primary">Ubah Password</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Profile -->
+<div class="modal fade" id="modalEditProfile" tabindex="-1" role="dialog" aria-labelledby="modalEditProfileLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" id="modalEditProfileLabel">Edit Profile</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{route('user.editProfile')}}" method="POST">
+        @method('put')
+        @csrf
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" class="form-control" id="nama" name="nama" value="{{$profileUser->name}}">
+          </div>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{$profileUser->username}}">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" value="{{$profileUser->email}}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-sm btn-primary">Ubah profile</button>
         </div>
       </form>
     </div>

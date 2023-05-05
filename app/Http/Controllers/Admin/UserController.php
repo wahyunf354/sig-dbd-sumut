@@ -117,7 +117,7 @@ class UserController extends Controller
 
     public function editProfile(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'nama' => 'required',
             'email' => [
                 'required',
                 'email',
@@ -127,7 +127,7 @@ class UserController extends Controller
                         }
                     }
                 ],
-            'usename' => [
+            'username' => [
                 'required',
                 'string',
                 function ($attribute, $value, $fail) {
@@ -143,7 +143,7 @@ class UserController extends Controller
         }
 
         $user = User::find(Auth::id());
-        $user->name = $request->name;
+        $user->name = $request->nama;
         $user->username = $request->username;
         $user->email = $request->email;
 

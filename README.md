@@ -17,9 +17,11 @@
 - [x] sudah buat tampilan peta berdasarkan laporan bulan terbaru
 - [x] membuat edit user
 - [x] membuat halaman profil user
-- [ ] edit user profile
+- [x] edit user profile
 - [x] membuat fitur change password user
 - [x] membuat function update untuk akabupaten kota
+- [ ] Buat Diagram dari analisa data
+- [ ] Buat algoritma PAM
 
 - Password : tekun berkarya, hidup sejahtera, mulia berbudaya 15 April 1948 -> tbhsmb1541948
 ## Security Vulnerabilities

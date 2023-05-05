@@ -116,7 +116,41 @@ class UserController extends Controller
     }
 
     public function editProfile(Request $request) {
-        // TODO: Buat function dan tampilan edit password
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => [
+                'required',
+                'email',
+                    function ($attribute, $value, $fail) {
+                        if (!$this->isUniqueEmail($value, Auth::id())) {
+                            $fail('Email sudah digunakan.');
+                        }
+                    }
+                ],
+            'usename' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (!$this->isUniqueUsername($value, Auth::id())) {
+                        $fail('Username sudah digunakan.');
+                    }
+                }   
+            ]
+        ]);
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $user = User::find(Auth::id());
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+
+        $user->save();
+
+        return redirect()->route('user.profile')->with('success', 'Data Profile anda berhasil diubah');
+
     }
 
     public function edit($id)

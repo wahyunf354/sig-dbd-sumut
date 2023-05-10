@@ -205,8 +205,14 @@ class UserController extends Controller
                     }
                 }  
             ],
-            'role' => 'required',
+            'role' => [
+                'required',
+                Rule::exists(RoleUser::class, 'id')
+            ],
             'password' => 'nullable|min:8|confirmed',
+            "kabkota_id" => [
+                Rule::requiredIf($request->role == 2)
+            ]
         ]);
 
         if($validator->fails()) {

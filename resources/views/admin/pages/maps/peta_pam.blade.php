@@ -40,7 +40,7 @@
 @section('script')
   <script>
     var map = L.map('map').setView([2.5953371, 98.8685835], 8);
-	var mapAccessToken = 'pk.eyJ1IjoibWVoYWtzYWNoZGV2YSIsImEiOiJjaXF2YTNvYWIwMDA1ZmttZzBsNTM1NXV1In0.-SA7eLZOeeYkVPG7Jek2ug';
+	  var mapAccessToken = 'pk.eyJ1IjoibWVoYWtzYWNoZGV2YSIsImEiOiJjaXF2YTNvYWIwMDA1ZmttZzBsNTM1NXV1In0.-SA7eLZOeeYkVPG7Jek2ug';
 
     var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token='+mapAccessToken, {
       maxZoom: 19,

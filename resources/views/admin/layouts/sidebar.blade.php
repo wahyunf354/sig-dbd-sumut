@@ -2,8 +2,7 @@
 <aside class="main-sidebar sidebar-light-navy elevation-4">
   <!-- Brand Logo -->
   <a href="index3.html" class="brand-link">
-    <img src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="AdminLTE Logo"
-        class="brand-image">
+    <img src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="AdminLTE Logo" class="brand-image">
     <span class="brand-text font-weight-light">SIG DBD SUMUT</span>
   </a>
 
@@ -12,14 +11,13 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel d-flex justify-content-center">
       <div class="image d-none">
-        <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2"
-          alt="User Image">
+        <img src="{{asset('assets')}}/img/logo/blank_profil.png" class="img-circle img-fluid elevation-2" alt="User Image">
       </div>
       <div class="info text-center">
         <p class="mb-0"><strong class="font-bold">{{\Illuminate\Support\Facades\Auth::user()->name}}</strong><br>
-        @if(Auth::user()->kabkota_id != null)
+          @if(Auth::user()->kabkota_id != null)
           {{Auth::user()->kabkota->nama}}
-        @endif
+          @endif
         </p>
       </div>
     </div>
@@ -35,7 +33,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none">
           <a href="{{route('admin.laporandbd.index')}}" class="nav-link">
             <i class="nav-icon fas fa-file-alt"></i>
             <p>
@@ -44,7 +42,7 @@
             <span class="right badge badge-danger">New</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-none">
           <a href="{{route('admin.uploadLaporanDBD')}}" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
@@ -52,8 +50,18 @@
             </p>
           </a>
         </li>
-        <li class="nav-header text-uppercase">Ringkasan Deman Dengue</li>
+
         <li class="nav-item">
+          <a href="{{route('admin.dataDBD.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Data DBD
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-header text-uppercase">Ringkasan Deman Dengue</li>
+        <li class="nav-item d-none">
           <a href="{{route('admin.dbd.peta.sebaran')}}" class="nav-link">
             <i class="nav-icon far fa-map"></i>
             <p>

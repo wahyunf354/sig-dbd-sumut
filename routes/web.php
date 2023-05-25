@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name("admin.dashboard");
 
     // User
-    Route::middleware(['admin'])->group(function() {
+    Route::middleware(['admin'])->group(function () {
       Route::resource('user', UserController::class)->except(['index']);
     });
     Route::resource('user', UserController::class)->only(['index']);
@@ -56,6 +56,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('laporandbd/{id}', [LaporanDBDController::class, 'showDetailLaporan'])->name('admin.laporandbd.detail');
     Route::get('uploadLaporanDBD', [LaporanDBDController::class, 'showUploadLaporan'])->name('admin.uploadLaporanDBD');
     Route::post('uploadLaporanDBD', [LaporanDBDController::class, 'uploadLaporan'])->name('admin.post.uploadLaporanDBD');
+
+    // Data DBD File
+    Route::get('dataDBD', [DBDController::class, 'index'])->name('admin.dataDBD.index');
+    Route::post('dataDBD', [DBDController::class, 'store'])->name('admin.dataDBD.store');
+    Route::get('dataDBD/create', [DBDController::class, 'create'])->name('admin.dataDBD.create');
+    // Data DBD
+    Route::get('dataDBD/{dataDBDFile}', [DBDController::class, 'show'])->name('admin.dataDBD.show');
+
+
 
     // Peta Sebaran DBD
     Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');

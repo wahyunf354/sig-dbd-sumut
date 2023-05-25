@@ -112,7 +112,7 @@ class LaporanDBDController extends Controller
 
     $result = $newReport->save();
 
-    $path = public_path('files/laporanDBD/' . $filenameExcel);
+      $path = public_path('files/laporanDBD/' . $filenameExcel);
 
     Excel::import(new LaporanDbdImport($newReport->id), $path);
 

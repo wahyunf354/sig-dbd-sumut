@@ -81,10 +81,10 @@ class LaporanDBDController extends Controller
       return redirect()->back()->withErrors($validator)->withInput($request->all());
     }
 
-    if(Auth::user()->role_user_id != 1) {
-      if (Auth::user()->role_user_id != 2){
+    if (Auth::user()->role_user_id != 1) {
+      if (Auth::user()->role_user_id != 2) {
       } else {
-        if ($request->kabkota_id != Auth::user()->kabkota_id){
+        if ($request->kabkota_id != Auth::user()->kabkota_id) {
           Alert::warning('User tidak diizinkan untuk melakukan tindakan ini');
           return redirect()->route('admin.dashboard');
         }
@@ -112,7 +112,7 @@ class LaporanDBDController extends Controller
 
     $result = $newReport->save();
 
-      $path = public_path('files/laporanDBD/' . $filenameExcel);
+    $path = public_path('files/laporanDBD/' . $filenameExcel);
 
     Excel::import(new LaporanDbdImport($newReport->id), $path);
 
@@ -134,11 +134,8 @@ class LaporanDBDController extends Controller
     $avg = [
       'ir' => $laporanDbdFile->laporanDbd->avg('ir_dbd'),
       'cfr' => $laporanDbdFile->laporanDbd->avg('cfr_dbd'),
-      'abj' => $laporanDbdFile->laporanDbd->avg('abj') 
+      'abj' => $laporanDbdFile->laporanDbd->avg('abj')
     ];
-
-
-
 
     return view('admin.pages.laporanDBD.detail', compact('laporanDbdFile', 'monthName', 'avg'));
   }
@@ -146,11 +143,10 @@ class LaporanDBDController extends Controller
   public function showDetailOneLaporan(Request $request)
   {
     $id = $request->input('id');
-    
+
     $laporandbd = LaporanDBD::find($id);
-    
+
 
     return response()->json($laporandbd);
   }
-
 }

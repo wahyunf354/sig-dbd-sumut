@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KabKotaController;
 use App\Http\Controllers\Admin\LaporanDBDController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GisControllerr;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Middleware\Authenticate;
@@ -63,11 +64,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('dataDBD/create', [DBDController::class, 'create'])->name('admin.dataDBD.create');
     // Data DBD
     Route::get('dataDBD/{dataDBDFile}', [DBDController::class, 'show'])->name('admin.dataDBD.show');
-
-
+    Route::delete('dataDBD/{dataDBDFile}', [DBDController::class, 'destroy'])->name('admin.dataDBD.destroy');
 
     // Peta Sebaran DBD
-    Route::get('petasebaran', [DBDController::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
+    Route::get('petasebaran', [GisControllerr::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
 
     // information
     Route::get('about', [InformationController::class, 'about'])->name('admin.about');

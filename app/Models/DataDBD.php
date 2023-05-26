@@ -24,4 +24,9 @@ class DataDBD extends Model
     'tahun',
     'bulan'
   ];
+
+  public function kabupatenOrKota()
+  {
+    return $this->belongsTo(KabupatenOrKotaSumut::class, 'kab_or_kota_id', 'id');
+  }
 }

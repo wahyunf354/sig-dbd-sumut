@@ -23,9 +23,15 @@
 
 <section class="content">
   <div class="container-fluid">
+
     <!-- Small boxes (Stat box) -->
     <div class="row">
       <div class="col-12 col-md-6">
+        @if(session('success'))
+        <div class="alert alert-success" role="alert">
+          {{session('success')}}
+        </div>
+        @endif
         <div class="card">
           <div class="card-header">
             <a class="btn btn-outline-primary btn-sm" href="{{route('admin.dataDBD.create')}}">Unggah Data</a>
@@ -52,7 +58,6 @@
                 @else
                 @foreach($dataDbdFiles as $key => $row)
 
-
                 <tr>
                   <td>{{$key+1}}</td>
                   <td>{{$row->bulan}}</td>
@@ -65,7 +70,12 @@
                   <td>{{ \Carbon\Carbon::parse($row->created_at)->timezone('Asia/Jakarta')->format('d F Y, H:i')." WIB" }}
                   </td>
                   <td class="d-flex gap-2">
-                    <button class="btn btn-danger btn-sm text-white mr-2">Hapus</button>
+                    <form class="d-inline" action="{{route('admin.dataDBD.destroy', $row->id)}}" method="post">
+                      @method('delete')
+                      @csrf
+                      <button class="btn btn-danger btn-sm text-white mr-2" type="submit">Hapus</button>
+                    </form>
+
                     <a href="{{route('admin.dataDBD.show',  $row->id)}}" class="btn btn-info btn-sm text-white">Detail</a>
 
                   </td>

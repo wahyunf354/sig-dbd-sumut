@@ -4,18 +4,18 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    {{-- <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="Sumut" height="60" width="60">
-  </div> --}}
-  @include('admin.layouts.header')
-  @include('admin.layouts.sidebar')
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="{{asset('assets')}}/img/logo/logo_sumut.png" alt="Sumut" height="60" width="60">
+    </div>
+    @include('admin.layouts.header')
+    @include('admin.layouts.sidebar')
 
-  <div class="content-wrapper">
-    @yield('content')
-  </div>
+    <div class="content-wrapper">
+      @yield('content')
+    </div>
 
-  @include('admin.layouts.footer')
+    @include('admin.layouts.footer')
   </div>
   <!-- ./wrapper -->
 

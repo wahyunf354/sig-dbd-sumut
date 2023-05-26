@@ -60,14 +60,11 @@ class DBDController extends Controller
     return view('admin.pages.maps.index', compact('jsonDataKabKota'));
   }
 
-  public function ir()
-  {
-  }
-
   public function index()
   {
 
     $dataDbdFiles = DataDBDFile::all();
+
 
     return view('admin.pages.dataDBD.index', compact('dataDbdFiles'));
   }
@@ -121,7 +118,7 @@ class DBDController extends Controller
     Excel::import(new DataDbdImport($dataDbdFileNew->id, $dataDbdFileNew->tahun, $dataDbdFileNew->bulan), $path);
 
     if ($result) {
-      return redirect()->route('admin.laporandbd.index')->with('success', 'Berhasil mengunggah data');
+      return redirect()->route('admin.dataDBD.index')->with('success', 'Berhasil mengunggah data');
     } else {
       return redirect()->back()->with('error', 'Terjadi Masalah input data');
     }
@@ -129,8 +126,18 @@ class DBDController extends Controller
 
   public function show($id)
   {
-    $dataDBD = DataDBD::all();
+    $dataDBD = DataDBD::where('data_dbd_file_id', '=', $id)->get();
 
     return view('admin.pages.dataDBD.show', compact('dataDBD'));
+  }
+
+  public function destroy($id)
+  {
+    $dataDBDFile = DataDBDFile::find($id);
+    if ($this->fileHelper->deleteFile(public_path('files/dataDBD/' . $dataDBDFile->file_url))) {
+      DataDBDFile::destroy($id);
+      DataDBD::where('data_dbd_file_id', '=', $id)->delete();
+    }
+    return redirect()->back()->with('success', 'Berhasil menghapus file');
   }
 }

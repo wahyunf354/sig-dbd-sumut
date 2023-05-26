@@ -35,6 +35,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
+          <div class="card-header">
+            Peta berdasarkan data DBD pada
+            <p>{{$minMonth}} {{$minYear}} - {{$maxMonth}} {{$maxYear}}</p>
+          </div>
           <div class="card-body">
             <div class="w-100" style="height: 600px" id="map"></div>
           </div>

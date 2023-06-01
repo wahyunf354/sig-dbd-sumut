@@ -43,7 +43,7 @@ class DataDbdImport implements ToCollection, WithCalculatedFormulas
           'meninggal_pr' => $row[27],
           'kasus_total' => $row[28],
           'meninggal_total' => $row[29],
-          'abj' => $row[33] || null,
+          'abj' => $row[33],
         ]);
       }
     }

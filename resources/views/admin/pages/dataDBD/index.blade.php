@@ -26,7 +26,7 @@
 
     <!-- Small boxes (Stat box) -->
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-7">
         @if(session('success'))
         <div class="alert alert-success" role="alert">
           {{session('success')}}
@@ -46,7 +46,7 @@
                   <th>Tahun</th>
                   <th>File</th>
                   <th>Tanggal Mengunggah</th>
-                  <th>Action</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,7 +69,7 @@
                   </td>
                   <td>{{ \Carbon\Carbon::parse($row->created_at)->timezone('Asia/Jakarta')->format('d F Y, H:i')." WIB" }}
                   </td>
-                  <td class="d-flex gap-2">
+                  <td>
                     <form class="d-inline" action="{{route('admin.dataDBD.destroy', $row->id)}}" method="post">
                       @method('delete')
                       @csrf
@@ -90,4 +90,17 @@
     </div>
   </div>
 </section>
+@endsection
+
+@section('script')
+<script>
+  $(function() {
+    $("#table_laporan_dbd_file").DataTable({
+      "responsive": true
+      , "lengthChange": false
+      , "autoWidth": false
+    , });
+  });
+
+</script>
 @endsection

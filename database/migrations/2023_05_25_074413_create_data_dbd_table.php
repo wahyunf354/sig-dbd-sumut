@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('meninggal_lk')->default(0);
             $table->integer('meninggal_pr')->default(0);
             $table->integer('meninggal_total')->default(0);
-            $table->integer('abj')->default(0);
+            $table->float('abj')->nullable();
             $table->foreign('data_dbd_file_id')->references('id')->on('data_dbd_file');
             $table->foreign('kab_or_kota_id')->references('id')->on('kabupaten_or_kota_sumut');
             $table->timestamps();

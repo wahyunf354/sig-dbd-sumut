@@ -27,8 +27,8 @@ class DBDController extends Controller
 
   public function petaSebaran()
   {
+    // NOTES: GAK DIPAKE
     $dataKabKota = KabupatenOrKotaSumut::all();
-
 
     $bulanNow = date('n');
 
@@ -62,10 +62,7 @@ class DBDController extends Controller
 
   public function index()
   {
-
-    $dataDbdFiles = DataDBDFile::all();
-
-
+    $dataDbdFiles = DataDBDFile::orderBy('created_at', 'desc')->get();
     return view('admin.pages.dataDBD.index', compact('dataDbdFiles'));
   }
 
@@ -74,7 +71,7 @@ class DBDController extends Controller
     $yearNow = strftime("%Y", time());
     $years = range($yearNow - 20, $yearNow + 20);
 
-    $mounts = ['Januari', 'Februari', 'Maret', 'April', 'Mai', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    $mounts = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
     return view('admin.pages.dataDBD.create', compact('years', 'mounts', 'yearNow'));
   }
@@ -99,7 +96,6 @@ class DBDController extends Controller
     }
 
     if (empty($filenameExcel)) {
-      dd("hai1");
       Alert::error("Terjadi Masalah", 'File laporan DBD gagal diupload');
       return redirect()->back();
     }

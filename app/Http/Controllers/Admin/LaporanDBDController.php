@@ -49,7 +49,7 @@ class LaporanDBDController extends Controller
     $yearNow = strftime("%Y", time());
     $years = range($yearNow - 20, $yearNow + 20);
 
-    $mounts = ['Januari', 'Februari', 'Maret', 'April', 'Mai', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    $mounts = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
     $kabKotas = KabupatenOrKotaSumut::all();
 

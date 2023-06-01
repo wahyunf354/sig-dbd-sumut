@@ -70,27 +70,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="pages/calendar.html" class="nav-link">
-            <i class="nav-icon fas fa-percentage"></i>
-            <p>
-              Incident Rate
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="pages/gallery.html" class="nav-link">
-            <i class="nav-icon fas fa-skull-crossbones"></i>
-            <p>
-              CFR
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="pages/kanban.html" class="nav-link">
-            <i class="nav-icon fas fa-bug"></i>
-            <p>
-              Angka Bebas Jentik
-            </p>
+          <a href="{{route('kabkota.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-hospital "></i>
+            <p>Kabupaten/Kota</p>
           </a>
         </li>
         <li class="nav-header text-uppercase">Administrasi</li>
@@ -100,12 +82,7 @@
             <p>Akun</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route('kabkota.index')}}" class="nav-link">
-            <i class="nav-icon fas fa-medkit  "></i>
-            <p>Kabupaten/Kota</p>
-          </a>
-        </li>
+
         <li class="nav-item d-none">
           <a href="https://adminlte.io/docs/3.1/" class="nav-link">
             <i class="nav-icon fas fa-stethoscope  "></i>

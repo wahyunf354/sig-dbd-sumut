@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KabKotaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('grafikByKabOfMonth', [KabKotaController::class, 'grafikByKabOfMonth']);
 Route::get('grafikByKabOfYear', [KabKotaController::class, 'grafikByKabOfYear']);
+
+
+Route::get('dataGrafikKasusPerKabKota', [AdminController::class, 'dataGrafikKasusPerKabKota']);
+Route::get('dataGrafikIrPerKabKota', [AdminController::class, 'dataGrafikIrPerKabKota']);
+Route::get('dataGrafikCfrPerKabKota', [AdminController::class, 'dataGrafikCfrPerKabKota']);
+Route::get('dataGrafikAbjPerKabKota', [AdminController::class, 'dataGrafikAbjPerKabKota']);

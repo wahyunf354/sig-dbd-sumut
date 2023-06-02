@@ -25,13 +25,12 @@
 <section class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2 col-6">
+      <div class="col-md-3 col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>150</h3>
-
-            <p>Jumlah Kasus</p>
+            <h3>{{ number_format($dataCards->kasus_total, 0, ',', '.') }}</h3>
+            <p>Jumlah Kasus <br>{{$minYear.'-'.$maxYear}}</p>
           </div>
           <div class="icon">
             <i class="fas fa-procedures"></i>
@@ -39,14 +38,27 @@
         </div>
       </div>
 
+      <div class="col-md-3 col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-perpule">
+          <div class="inner">
+            <h3>{{ number_format($dataCards->meninggal_total, 0, ',', '.') }}</h3>
+            <p>Jumlah Kasus Meninggal <br>{{$minYear.'-'.$maxYear}}</p>
+          </div>
+          <div class="icon">
+            <i class="far fa-heart"></i>
+          </div>
+        </div>
+      </div>
 
-      <div class="col-lg-2 col-6">
+      <div class="col-md-3 col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{number_format($dataCards->IR, 2, ',', '.')}}</h3>
 
-            <p>Incident Rate</p>
+            <p>Incident Rate <br>{{$minYear.'-'.$maxYear}}</p>
+
           </div>
           <div class="icon">
             <i class="fas fa-stethoscope"></i>
@@ -54,13 +66,12 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-6">
+      <div class="col-md-3 col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>150</h3>
-
-            <p>Case Fatality Rate</p>
+            <h3>{{number_format($dataCards->CFR, 2, ',', '.')}}<sup style="font-size: 20px">%</sup></h3>
+            <p>Case Fatality Rate <br>{{$minYear.'-'.$maxYear}}</p>
           </div>
           <div class="icon">
             <i class="fas fa-heart"></i>
@@ -68,13 +79,12 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-6">
+      <div class="col-md-3 col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-primary">
           <div class="inner">
-            <h3>150</h3>
-
-            <p>Angka Bebas Jentik</p>
+            <h3>{{number_format($dataCards->ABJ, 2, ',', '.')}}<sup style="font-size: 20px">%</sup></h3>
+            <p>Angka Bebas Jentik <br>{{$minYear.'-'.$maxYear}}</p>
           </div>
           <div class="icon">
             <i class="fas fa-shield-virus"></i>
@@ -82,13 +92,13 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-6">
+      <div class="col-md-3 col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-secondary">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{number_format($dataCards->jmlpddk, 0, ',', '.')}}</h3>
 
-            <p>Jumlah Penduduk</p>
+            <p>Jumlah Penduduk <br>{{$minYear.'-'.$maxYear}}</p>
           </div>
           <div class="icon">
             <i class="fas fa-users"></i>

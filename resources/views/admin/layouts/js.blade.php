@@ -31,8 +31,6 @@
 <script src="{{asset('admin_assets')}}/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('admin_assets')}}/dist/js/demo.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{asset('admin_assets')}}/dist/js/pages/dashboard.js"></script>
 
 <!-- DataTables  & Plugins -->
 <script src="{{asset('admin_assets')}}/plugins/datatables/jquery.dataTables.min.js"></script>

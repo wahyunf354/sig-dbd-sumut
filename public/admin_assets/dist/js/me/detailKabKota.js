@@ -33,7 +33,7 @@ function fetchdataGrafikIfCfr() {
         label: ["Kasus DBD", "Kasus Meninggal DBD"],
         data: {
           labels: data.labels,
-          data: [data.kasus_total, data.meniggal_total],
+          data: [data.kasus_total, data.meninggal_total],
         },
         elSelect: "#kasus_grafik",
         backgroundColor: ["rgba(255, 229, 105, 0.5)", "rgba(183, 4, 4, 0.5)"],

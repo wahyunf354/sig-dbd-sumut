@@ -122,7 +122,27 @@ class KabKotaController extends Controller
     {
         $kabKota = KabupatenOrKotaSumut::find($id);
 
-        return view('admin.pages.kabupatenkota.show', compact('kabKota'));
+        $minYear = DB::table('data_dbd')
+            ->select(DB::raw('MIN(CONCAT(tahun)) as minYear'))
+            ->value('minYear');
+
+        $maxYear = DB::table('data_dbd')
+            ->select(DB::raw('MAX(CONCAT(tahun)) as maxYear'))
+            ->value('maxYear');
+
+        $minYear = $minYear > (date('Y') - 5) ? $minYear : (date('Y') - 5);
+
+        $dataCards = DB::table('data_dbd as d')
+            ->selectRaw('(SUM(kasus_total) / jmlpddk * 100000) as IR, (SUM(d.meninggal_total) / SUM(d.kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, SUM(d.kasus_total) as kasus_total, SUM(d.meninggal_total) as meninggal_total, AVG(abj) as ABJ')
+            ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
+            ->where('kab_or_kota_id', '=', $id)->whereBetween(
+                'tahun',
+                [$minYear, $maxYear]
+            )
+            ->groupBy('d.kab_or_kota_id')
+            ->get()[0];
+
+        return view('admin.pages.kabupatenkota.show', compact('kabKota', 'dataCards', 'minYear', 'maxYear'));
     }
 
     /**

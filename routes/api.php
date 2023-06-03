@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\KabKotaController;
+use App\Http\Controllers\GisControllerr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,8 @@ Route::get('dataGrafikKasusPerKabKota', [AdminController::class, 'dataGrafikKasu
 Route::get('dataGrafikIrPerKabKota', [AdminController::class, 'dataGrafikIrPerKabKota']);
 Route::get('dataGrafikCfrPerKabKota', [AdminController::class, 'dataGrafikCfrPerKabKota']);
 Route::get('dataGrafikAbjPerKabKota', [AdminController::class, 'dataGrafikAbjPerKabKota']);
+
+
+
+// Test endpoint
+Route::get('testCluster', [GisControllerr::class, 'testCluster']);

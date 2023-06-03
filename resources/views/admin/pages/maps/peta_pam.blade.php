@@ -97,13 +97,14 @@
   let dataKabKota = JSON.parse('<?= $jsonData ?>')
 
   function addColorClaster(data) {
+    console.log(data)
+
     var uniqueClusters = [...new Set(data.map(item => item.cluster))]
     const result = []
     uniqueClusters.forEach((item) => result.push({
       cluster: item
     }))
 
-    console.log(data)
 
     for (let i = 0; i < result.length; i++) {
       let cluster = result[i].cluster
@@ -150,24 +151,15 @@
       item.color = colorMap[index]
     });
 
-    console.log(result)
-
-
-
     return result
   }
 
   const url = 'http://localhost:5000/pam';
   const data = dataKabKota
 
-  fetchClaster(url, data)
-    .then(responseData => {
-      let colorClaster = addColorClaster(responseData)
-      extractGeoJsonAndDisplay(responseData, colorClaster)
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  let colorClaster = addColorClaster(dataKabKota)
+  extractGeoJsonAndDisplay(dataKabKota, colorClaster)
+
 
 
   async function fetchClaster(url, data) {

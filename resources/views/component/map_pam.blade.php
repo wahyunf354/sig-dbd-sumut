@@ -33,6 +33,7 @@
   const data = dataKabKota;
 
   let colorClaster = addColorClaster(dataKabKota);
+  console.log(colorClaster)
   extractGeoJsonAndDisplay(dataKabKota, colorClaster);
 
   function addColorClaster(data) {

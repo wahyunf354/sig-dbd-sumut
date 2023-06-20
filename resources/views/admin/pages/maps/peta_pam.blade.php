@@ -51,7 +51,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($results as $key => $row)
+                @foreach($dataDBD as $key => $row)
                 <thead>
                   <tr>
                     <td>{{$key+1}}</td>

@@ -32,7 +32,7 @@ class GisControllerr extends Controller
         ];
         $result = $this->cleanData($inputData);
 
-        return response()->json($result, 200);
+        return response()->json(["input" => $inputData, "output" => $result], 200);
     }
 
     private function zScoreNormalization($data)
@@ -75,11 +75,10 @@ class GisControllerr extends Controller
     {
         $inputData = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
 
-        $resultZscore = $this->zScoreNormalization($inputData);
+        $outputZscore = $this->zScoreNormalization($inputData);
 
-        return response()->json($resultZscore, 200);
+        return response()->json(compact('inputData', 'outputZscore'), 200);
     }
-
 
     private function euclidean_distance($point1, $point2)
     {
@@ -120,11 +119,11 @@ class GisControllerr extends Controller
     public function testChebyshevDistance()
     {
         $inputDataPoint1 = [3, 4, 4];
-        $inputDataPoint2 = [2, 6, 4];
+        $inputDataPoint2 = [5, 9, 5];
 
         $result = $this->chebyshev_distance($inputDataPoint1, $inputDataPoint2);
 
-        return response()->json($result);
+        return response()->json(compact("inputDataPoint1", "inputDataPoint2", "result"));
     }
 
     private function pam($n_cluster, $data)
@@ -274,7 +273,6 @@ class GisControllerr extends Controller
 
         return $dataBeforeClaster;
     }
-
 
     public function petaSebaran()
     {

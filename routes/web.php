@@ -83,4 +83,6 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'test'], function () {
   Route::get('testCleanData', [GisControllerr::class, 'testCleanData']);
   Route::get('testDataMining', [GisControllerr::class, 'testCluster']);
+  Route::get('testZscore', [GisControllerr::class, 'testZscore']);
+  Route::get('testChebyshevDistance', [GisControllerr::class, 'testChebyshevDistance']);
 });

@@ -250,6 +250,11 @@ class GisControllerr extends Controller
         ];
     }
 
+    public function testGetRangeTimeData()
+    {
+        return response()->json($this->getRangeTimeData());
+    }
+
     private function getDataFromDB()
     {
         $results = DB::table('data_dbd as d')
@@ -259,6 +264,11 @@ class GisControllerr extends Controller
             ->get();
 
         return $results;
+    }
+
+    public function testGetDataDBDFromDB()
+    {
+        return response()->json($this->getDataFromDB());
     }
 
     private function getDataWantToCluster($results)

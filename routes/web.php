@@ -85,4 +85,6 @@ Route::group(['prefix' => 'test'], function () {
   Route::get('testDataMining', [GisControllerr::class, 'testCluster']);
   Route::get('testZscore', [GisControllerr::class, 'testZscore']);
   Route::get('testChebyshevDistance', [GisControllerr::class, 'testChebyshevDistance']);
+  Route::get('testGetDataDBDFromDB', [GisControllerr::class, 'testGetDataDBDFromDB']);
+  Route::get('testGetRangeTimeData', [GisControllerr::class, 'testGetRangeTimeData']);
 });

@@ -37,8 +37,6 @@
   extractGeoJsonAndDisplay(dataKabKota, colorClaster);
 
   function addColorClaster(data) {
-    console.log(data);
-
     var uniqueClusters = [...new Set(data.map((item) => item.cluster))];
     const result = [];
     uniqueClusters.forEach((item) =>

@@ -79,3 +79,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('pengaduan/{id}', [PengaduanController::class, 'destroy'])->name("admin.pengaduan.destroy");
   });
 });
+
+Route::group(['prefix' => 'test'], function () {
+  Route::get('testCleanData', [GisControllerr::class, 'testCleanData']);
+  Route::get('testDataMining', [GisControllerr::class, 'testCluster']);
+});

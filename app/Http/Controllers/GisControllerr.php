@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class GisControllerr extends Controller
 {
 
-    function cleanData($data)
+    private function cleanData($data)
     {
         foreach ($data as &$row) {
             foreach ($row as &$value) {
@@ -22,6 +22,17 @@ class GisControllerr extends Controller
         }
 
         return $data;
+    }
+
+    public function testCleanData()
+    {
+        $inputData = [
+            ['IR' => "0.4", 'CFR' => '0.1', 'ABJ' => '90.5'],
+            ['IR' => '1.5', 'CFR' => null, 'ABJ' => null],
+        ];
+        $result = $this->cleanData($inputData);
+
+        return response()->json($result, 200);
     }
 
     private function zScoreNormalization($data)
@@ -60,6 +71,15 @@ class GisControllerr extends Controller
         return $normalizedData;
     }
 
+    public function testZscore()
+    {
+        $inputData = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
+
+        $resultZscore = $this->zScoreNormalization($inputData);
+
+        return response()->json($resultZscore, 200);
+    }
+
 
     private function euclidean_distance($point1, $point2)
     {
@@ -95,6 +115,16 @@ class GisControllerr extends Controller
         }
 
         return $distance;
+    }
+
+    public function testChebyshevDistance()
+    {
+        $inputDataPoint1 = [3, 4, 4];
+        $inputDataPoint2 = [2, 6, 4];
+
+        $result = $this->chebyshev_distance($inputDataPoint1, $inputDataPoint2);
+
+        return response()->json($result);
     }
 
     private function pam($n_cluster, $data)
@@ -136,7 +166,6 @@ class GisControllerr extends Controller
                     array_push($tmpArr, $resultDistanceArr[$j][$i]);
                 }
 
-
                 $minIndex = array_search(min($tmpArr), $tmpArr);
                 array_push($resultClusterLabel, ['label' => $minIndex, 'data' => $data[$i]]); // Simpan indeks yang ditemukan
                 $costTmp += min($tmpArr);
@@ -169,10 +198,26 @@ class GisControllerr extends Controller
     private function dataMining($data)
     {
         $resultClean = $this->cleanData($data);
+
         $resultZscore = $this->zScoreNormalization($resultClean);
 
         $actualyCluster = $this->pam(3, $resultZscore);
 
+        return $actualyCluster;
+    }
+
+    private function testDataMining($data)
+    {
+        dump("Input Data", $data);
+        $resultClean = $this->cleanData($data);
+
+        dump("Data cleaning", $resultClean);
+        $resultZscore = $this->zScoreNormalization($resultClean);
+
+        dump("Data zscore");
+        $actualyCluster = $this->pam(3, $resultZscore);
+
+        dd('Data cluster', $actualyCluster);
         return $actualyCluster;
     }
 
@@ -181,20 +226,13 @@ class GisControllerr extends Controller
     {
         $data = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
 
-        $actualyCluster = $this->dataMining($data);
+        $actualyCluster = $this->testDataMining($data);
 
         return response()->json($actualyCluster, 200);
     }
 
-
-    public function petaSebaran()
+    private function getRangeTimeData()
     {
-        $results = DB::table('data_dbd as d')
-            ->selectRaw('kab.nama as name, AVG(abj) as ABJ, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, kab.file_geojson as file_geojson')
-            ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
-            ->groupBy('kab_or_kota_id')
-            ->get()->toArray();
-
         $minMonthYear = DB::table('data_dbd')
             ->select(DB::raw('MIN(CONCAT(tahun, "-", bulan)) as minMonthYear'))
             ->value('minMonthYear');
@@ -209,22 +247,56 @@ class GisControllerr extends Controller
         $maxMonth = date('F', strtotime($maxMonthYear));
         $maxYear = date('Y', strtotime($maxMonthYear));
 
+        return [
+            "minMonth" => $minMonth,
+            "minYear" => $minYear,
+            "maxMonth" => $maxMonth,
+            "maxYear" => $maxYear,
+        ];
+    }
 
+    private function getDataFromDB()
+    {
+        $results = DB::table('data_dbd as d')
+            ->selectRaw('kab.nama as name, AVG(abj) as ABJ, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, kab.file_geojson as file_geojson')
+            ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
+            ->groupBy('kab_or_kota_id')
+            ->get()->toArray();
+        return $results;
+    }
+
+    private function getDataWantToCluster($results)
+    {
         $dataBeforeClaster = [];
         for ($i = 0; $i < count($results); $i++) {
             array_push($dataBeforeClaster, [$results[$i]->IR, $results[$i]->CFR, $results[$i]->ABJ]);
         }
 
+        return $dataBeforeClaster;
+    }
+
+
+    public function petaSebaran()
+    {
+        $rangeDataDBD = $this->getRangeTimeData();
+        // Memecah nilai minMonthYear dan maxMonthYear menjadi bulan dan tahun terpisah
+        $minMonth = $rangeDataDBD['minMonth'];
+        $minYear = $rangeDataDBD['minYear'];
+        $maxMonth = $rangeDataDBD['maxMonth'];
+        $maxYear = $rangeDataDBD['maxYear'];
+
+        $dataDBD = $this->getDataFromDB();
+
+        $dataBeforeClaster = $this->getDataWantToCluster($dataDBD);
 
         $resultCluster = $this->dataMining($dataBeforeClaster);
 
-        for ($i = 0; $i < count($results); $i++) {
-            $results[$i]->cluster = $resultCluster['label'][$i]['label'];
+        for ($i = 0; $i < count($dataDBD); $i++) {
+            $dataDBD[$i]->cluster = $resultCluster['label'][$i]['label'];
         }
 
+        $jsonData = json_encode($dataDBD);
 
-        $jsonData = json_encode($results);
-
-        return view('admin.pages.maps.peta_pam', compact('jsonData', 'results', 'minMonth', 'minYear', 'maxMonth', 'maxYear'));
+        return view('admin.pages.maps.peta_pam', compact('jsonData', 'dataDBD', 'minMonth', 'minYear', 'maxMonth', 'maxYear'));
     }
 }

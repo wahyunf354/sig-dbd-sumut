@@ -60,24 +60,6 @@ class HomeController extends Controller
     }
 
 
-    private function euclidean_distance($point1, $point2)
-    {
-        if (count($point1) !== count($point2)) {
-            throw new Exception("Dimensi kedua titik harus sama");
-        }
-
-        $sumOfSquares = 0;
-        $dimensions = count($point1);
-
-        for ($i = 0; $i < $dimensions; $i++) {
-            $difference = $point1[$i] - $point2[$i];
-            $sumOfSquares += pow($difference, 2);
-        }
-
-        $distance = sqrt($sumOfSquares);
-        return $distance;
-    }
-
     private function chebyshev_distance($point1, $point2)
     {
         if (count($point1) !== count($point2)) {
@@ -176,17 +158,6 @@ class HomeController extends Controller
     }
 
 
-    public function testCluster()
-    {
-        $data = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
-
-        $actualyCluster = $this->dataMining($data);
-
-        return response()->json($actualyCluster, 200);
-    }
-
-
-
     public function index()
     {
         return view('pages.index');
@@ -195,11 +166,17 @@ class HomeController extends Controller
     public function peta_sebaran()
     {
 
+        // $results = DB::table('data_dbd as d')
+        //     ->selectRaw('kab.name as name, AVG(abj) as ABJ, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, kab.file_geojson as file_geojson')
+        //     ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
+        //     ->groupBy('kab_or_kota_id')
+        //     ->get()->toArray();
+
         $results = DB::table('data_dbd as d')
-            ->selectRaw('kab.nama as name, AVG(abj) as ABJ, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, kab.file_geojson as file_geojson')
+            ->selectRaw("kab.nama as name, kab.file_geojson as file_geojson, AVG(abj) as ABJ, kab.id as kab_kota_id, kab.jmlpddk, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR")
             ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
-            ->groupBy('kab_or_kota_id')
-            ->get()->toArray();
+            ->groupBy('kab.id', 'kab.jmlpddk', 'kab.nama', "kab.file_geojson")
+            ->get();
 
         $minMonthYear = DB::table('data_dbd')
             ->select(DB::raw('MIN(CONCAT(tahun, "-", bulan)) as minMonthYear'))
@@ -251,5 +228,33 @@ class HomeController extends Controller
         // dd($dataCards);
 
         return view('pages.peta_sebaran', compact('jsonData', 'results', 'minMonth', 'minYear', 'maxMonth', 'maxYear', 'dataCards'));
+    }
+
+
+    public function testCluster()
+    {
+        $data = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
+
+        $actualyCluster = $this->dataMining($data);
+
+        return response()->json($actualyCluster, 200);
+    }
+
+    private function euclidean_distance($point1, $point2)
+    {
+        if (count($point1) !== count($point2)) {
+            throw new Exception("Dimensi kedua titik harus sama");
+        }
+
+        $sumOfSquares = 0;
+        $dimensions = count($point1);
+
+        for ($i = 0; $i < $dimensions; $i++) {
+            $difference = $point1[$i] - $point2[$i];
+            $sumOfSquares += pow($difference, 2);
+        }
+
+        $distance = sqrt($sumOfSquares);
+        return $distance;
     }
 }

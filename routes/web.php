@@ -67,7 +67,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('dataDBD/{dataDBDFile}', [DBDController::class, 'destroy'])->name('admin.dataDBD.destroy');
 
     // Peta Sebaran DBD
-    Route::get('petasebaran', [GisControllerr::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
+  Route::get('petasebaran', [GisControllerr::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
 
     // information
     Route::get('about', [InformationController::class, 'about'])->name('admin.about');

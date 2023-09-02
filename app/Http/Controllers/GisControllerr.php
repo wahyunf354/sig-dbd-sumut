@@ -291,6 +291,7 @@ class GisControllerr extends Controller
         $maxYear = $rangeDataDBD['maxYear'];
 
         $dataDBD = $this->getDataFromDB();
+        // dd($dataDBD);
 
         $dataBeforeClaster = $this->getDataWantToCluster($dataDBD);
 

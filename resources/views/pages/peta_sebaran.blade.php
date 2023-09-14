@@ -23,7 +23,7 @@
 
     <div class="section-title">
       <h2>Data Kasus DBD</h2>
-      <p>25 Maret 2023</p>
+      <p>{{$year}}</p>
     </div>
 
     <div class="row justify-content-center">
@@ -31,7 +31,6 @@
         <div class="icon-box">
           <div class="icon"><i class="bx bx-tired"></i></div>
           <h4>{{number_format($dataCards->IR, 2, ',', '.')}}</h4>
-
           <p><strong>Incident Rate DBD</strong>, jumlah kasus baru DBD per populasi, dikalikan dengan faktor, untuk
             mengetahui tingkat insiden DBD.</p>
         </div>
@@ -41,8 +40,6 @@
         <div class="icon-box">
           <div class="icon"><i class="bx bx-file"></i></div>
           <h4>{{number_format($dataCards->CFR, 2, ',', '.')}}%</h4>
-
-
           <p><strong>Case Fatality Rate (CFR)</strong> atau atau tingkat kematian kasus, persentase kasus yang
             berakhir dengan kematian dalam suatu populasi, dihitung dengan membagi jumlah kematian dengan jumlah
             kasus.</p>

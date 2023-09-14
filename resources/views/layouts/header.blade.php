@@ -10,7 +10,7 @@
       <ul>
         <li><a class="nav-link scrollto {{ Request::is('/') ? 'active' : '' }}" href="{{route('beranda')}}">Beranda</a></li>
 {{--        <li><a class="nav-link scrollto" href="#berita">Berita</a></li>--}}
-        <li><a class="nav-link scrollto {{ Request::is('/peta_sebaran') ? '`active' : '' }}" href="{{route('peta_sebaran')}}">Sebaran</a></li>
+        <li><a class="nav-link scrollto {{ Request::is('/peta_sebaran/2023') ? '`active' : '' }}" href="{{route('peta_sebaran', 2023)}}">Sebaran</a></li>
         <li><a class="nav-link scrollto d-none" href="#contact_rs">Edukasi</a></li>
         <li><a class="nav-link scrollto" href="{{route('beranda')}}#faq">Tanya Jawab</a></li>
         <li><a class="nav-link scrollto" href="#contact">Pengaduan</a></li>

@@ -10,10 +10,45 @@ class HomeController extends Controller
 
     function cleanData($data)
     {
+        // Initialize an associative array to hold column values
+        $columnValues = [];
+
+        // Loop through data to populate column values
+        foreach ($data as $row) {
+            foreach ($row as $columnName => $value) {
+                if (!isset($columnValues[$columnName])) {
+                    $columnValues[$columnName] = [];
+                }
+                if ($value !== null) {
+                    $columnValues[$columnName][] = $value;
+                }
+            }
+        }
+
+        // Calculate the median for each column
+        $columnMedians = [];
+        foreach ($columnValues as $columnName => $values) {
+            sort($values); // Sort the values in ascending order
+            $count = count($values);
+            $middle = floor($count / 2);
+            if ($count == 0) {
+                $median = 0;
+            } else if ($count % 2 == 0) {
+                // If even number of values, take the average of the two middle values
+                $median = ($values[$middle - 1] + $values[$middle]) / 2;
+            } else {
+                // If odd number of values, take the middle value
+                $median = $values[$middle];
+            }
+
+            $columnMedians[$columnName] = $median;
+        }
+
+        // Loop through data again and replace null values with column medians
         foreach ($data as &$row) {
-            foreach ($row as &$value) {
+            foreach ($row as $columnName => &$value) {
                 if ($value === null) {
-                    $value = 0;
+                    $value = $columnMedians[$columnName];
                 } elseif (is_string($value)) {
                     $value = floatval($value);
                 }
@@ -50,7 +85,11 @@ class HomeController extends Controller
         for ($i = 0; $i < $n; $i++) {
             $normalizedRow = [];
             for ($j = 0; $j < $dim; $j++) {
-                $normalizedValue = ($data[$i][$j] - $mean[$j]) / $stdDev[$j];
+                if ($stdDev[$j]) {
+                    $normalizedValue = ($data[$i][$j] - $mean[$j]) / $stdDev[$j];
+                } else {
+                    $normalizedValue = 0;
+                }
                 $normalizedRow[] = $normalizedValue;
             }
             $normalizedData[] = $normalizedRow;
@@ -150,6 +189,7 @@ class HomeController extends Controller
     private function dataMining($data)
     {
         $resultClean = $this->cleanData($data);
+
         $resultZscore = $this->zScoreNormalization($resultClean);
 
         $actualyCluster = $this->pam(3, $resultZscore);
@@ -163,15 +203,107 @@ class HomeController extends Controller
         return view('pages.index');
     }
 
-    public function peta_sebaran()
+    public function peta_sebaran($year = null)
     {
+        $beforeResult = DB::table('data_dbd as d')
+            ->selectRaw("kab.nama as name, kab.file_geojson as file_geojson, AVG(abj) as ABJ, kab.id as kab_kota_id, kab.jmlpddk,SUM(kasus_total), (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR")
+            ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
+            ->groupBy('kab.id', 'kab.jmlpddk', 'kab.nama', "kab.file_geojson");
 
-        // $results = DB::table('data_dbd as d')
-        //     ->selectRaw('kab.name as name, AVG(abj) as ABJ, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR, kab.jmlpddk as jmlpddk, kab.file_geojson as file_geojson')
-        //     ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
-        //     ->groupBy('kab_or_kota_id')
-        //     ->get()->toArray();
+        if ($year) {
+            $results = $beforeResult->where('tahun', '=', $year)->get();
+        } else {
+            $results = $beforeResult->get();
+        }
 
+        $minMonthYear = DB::table('data_dbd')
+            ->select(DB::raw('MIN(CONCAT(tahun, "-", bulan)) as minMonthYear'))
+            ->value('minMonthYear');
+
+        $maxMonthYear = DB::table('data_dbd')
+            ->select(DB::raw('MAX(CONCAT(tahun, "-", bulan)) as maxMonthYear'))
+            ->value('maxMonthYear');
+
+        $minYear = DB::table('data_dbd')
+            ->select(DB::raw('MIN(CONCAT(tahun)) as minYear'))
+            ->value('minYear');
+
+        $maxYear = DB::table('data_dbd')
+            ->select(DB::raw('MAX(CONCAT(tahun)) as maxYear'))
+            ->value('maxYear');
+
+        $minYear = $minYear > (date('Y') - 5) ? $minYear : (date('Y') - 5);
+
+        if ($year) {
+            $dataCards = DB::table('data_dbd as d')
+                ->selectRaw('(SUM(kasus_total) / (SELECT SUM(jmlpddk) FROM kabupaten_or_kota_sumut) * 100000) as IR, (SUM(d.meninggal_total) / SUM(d.kasus_total) * 100) as CFR, SUM(d.kasus_total) as kasus_total, SUM(d.meninggal_total) as meninggal_total, AVG(abj) as ABJ, (SELECT SUM(jmlpddk) FROM kabupaten_or_kota_sumut) as jmlpddk')->where(
+                    'tahun',
+                    $year
+                )
+                ->get()[0];
+        } else {
+            $dataCards = DB::table('data_dbd as d')
+                ->selectRaw('(SUM(kasus_total) / (SELECT SUM(jmlpddk) FROM kabupaten_or_kota_sumut) * 100000) as IR, (SUM(d.meninggal_total) / SUM(d.kasus_total) * 100) as CFR, SUM(d.kasus_total) as kasus_total, SUM(d.meninggal_total) as meninggal_total, AVG(abj) as ABJ, (SELECT SUM(jmlpddk) FROM kabupaten_or_kota_sumut) as jmlpddk')->where(
+                    'tahun',
+                    [$minYear, $maxYear]
+                )
+                ->get()[0];
+        }
+
+        // Memecah nilai minMonthYear dan maxMonthYear menjadi bulan dan tahun terpisah
+        $minMonth = date('F', strtotime($minMonthYear));
+        $minYear = date('Y', strtotime($minMonthYear));
+        $maxMonth = date('F', strtotime($maxMonthYear));
+        $maxYear = date('Y', strtotime($maxMonthYear));
+
+
+        $dataBeforeClaster = [];
+        for ($i = 0; $i < count($results); $i++) {
+            array_push($dataBeforeClaster, [$results[$i]->IR, $results[$i]->CFR, $results[$i]->ABJ]);
+        }
+
+
+        $resultCluster = $this->dataMining($dataBeforeClaster);
+
+        for ($i = 0; $i < count($results); $i++) {
+            $results[$i]->cluster = $resultCluster['label'][$i]['label'];
+        }
+
+        $jsonData = json_encode($results);
+
+        return view('pages.peta_sebaran', compact('jsonData', 'results', 'minMonth', 'minYear', 'maxMonth', 'maxYear', 'dataCards', 'year'));
+    }
+
+
+    public function testCluster()
+    {
+        $data = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
+
+        $actualyCluster = $this->dataMining($data);
+
+        return response()->json($actualyCluster, 200);
+    }
+
+    private function euclidean_distance($point1, $point2)
+    {
+        if (count($point1) !== count($point2)) {
+            throw new Exception("Dimensi kedua titik harus sama");
+        }
+
+        $sumOfSquares = 0;
+        $dimensions = count($point1);
+
+        for ($i = 0; $i < $dimensions; $i++) {
+            $difference = $point1[$i] - $point2[$i];
+            $sumOfSquares += pow($difference, 2);
+        }
+
+        $distance = sqrt($sumOfSquares);
+        return $distance;
+    }
+
+    public function peta_demo()
+    {
         $results = DB::table('data_dbd as d')
             ->selectRaw("kab.nama as name, kab.file_geojson as file_geojson, AVG(abj) as ABJ, kab.id as kab_kota_id, kab.jmlpddk, (SUM(kasus_total) / kab.jmlpddk * 100000) as IR, (SUM(meninggal_total) / SUM(kasus_total) * 100) as CFR")
             ->join('kabupaten_or_kota_sumut as kab', 'kab.id', '=', 'd.kab_or_kota_id')
@@ -227,34 +359,6 @@ class HomeController extends Controller
 
         // dd($dataCards);
 
-        return view('pages.peta_sebaran', compact('jsonData', 'results', 'minMonth', 'minYear', 'maxMonth', 'maxYear', 'dataCards'));
-    }
-
-
-    public function testCluster()
-    {
-        $data = [[2, 6, 4], [3, 4, 4], [3, 8, 6], [4, 7, 1], [6, 2, 2], [6, 4, 9], [7, 3, 8], [7, 4, 3], [8, 5, 1], [7, 6, 2]];
-
-        $actualyCluster = $this->dataMining($data);
-
-        return response()->json($actualyCluster, 200);
-    }
-
-    private function euclidean_distance($point1, $point2)
-    {
-        if (count($point1) !== count($point2)) {
-            throw new Exception("Dimensi kedua titik harus sama");
-        }
-
-        $sumOfSquares = 0;
-        $dimensions = count($point1);
-
-        for ($i = 0; $i < $dimensions; $i++) {
-            $difference = $point1[$i] - $point2[$i];
-            $sumOfSquares += pow($difference, 2);
-        }
-
-        $distance = sqrt($sumOfSquares);
-        return $distance;
+        return view('pages.peta_demo', compact('jsonData', 'results', 'minMonth', 'minYear', 'maxMonth', 'maxYear', 'dataCards'));
     }
 }

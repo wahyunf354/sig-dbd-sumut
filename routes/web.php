@@ -26,7 +26,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('beranda');
-Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran'])->name('peta_sebaran');
+Route::get('/peta_sebaran', [HomeController::class, 'peta_sebaran']);
+Route::get('/peta_sebaran/{year}', [HomeController::class, 'peta_sebaran'])->name('peta_sebaran');
+Route::get('/peta_demo', [HomeController::class, 'peta_demo'])->name('peta_sebaran.demo');
 
 // Route::get('/admin', [AdminController::class, 'index']);
 
@@ -67,7 +69,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('dataDBD/{dataDBDFile}', [DBDController::class, 'destroy'])->name('admin.dataDBD.destroy');
 
     // Peta Sebaran DBD
-  Route::get('petasebaran', [GisControllerr::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
+    Route::get('petasebaran', [GisControllerr::class, 'petaSebaran'])->name('admin.dbd.peta.sebaran');
 
     // information
     Route::get('about', [InformationController::class, 'about'])->name('admin.about');

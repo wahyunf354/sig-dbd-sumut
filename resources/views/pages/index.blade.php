@@ -12,7 +12,7 @@
         <h1>DBD Sumatera Utara</h1>
         <h2>Website ini sebagai media informasi kepada masyarakat tentang penyakit DBD dan kondisi Penyebaran Penyakit DBD di Sumatera Utara</h2>
         <div class="d-flex justify-content-center justify-content-lg-start">
-          <a href="{{route("peta_sebaran")}}" class="btn-get-started scrollto">Peta Sebaran</a>
+          <a href="{{route("peta_sebaran", 2023)}}" class="btn-get-started scrollto">Peta Sebaran</a>
         </div>
       </div>
       <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
